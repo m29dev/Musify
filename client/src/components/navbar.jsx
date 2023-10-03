@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Image, Dropdown } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useGetAccountMutation } from '../services/accountService'
+import { setAccountInfo, updateAuthInfoToken } from '../redux/authSlice'
+import { useRefreshTokenMutation } from '../services/authService'
 
 const Navbar = () => {
     const [authMode, setAuthMode] = useState(false)
     const { authInfo } = useSelector((state) => state.auth)
-
-    const navigate = useNavigate()
+    const { accountInfo } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
 
     // navigation features
+    const navigate = useNavigate()
     const navForward = () => {
         navigate(1)
     }
@@ -20,9 +24,39 @@ const Navbar = () => {
         navigate(`/${query}`)
     }
 
-    // check authInfo status and select display mode
+    // refresh token
+    const [refreshToken] = useRefreshTokenMutation()
+    const runRefreshToken = useCallback(async () => {
+        // get refreshed token from server
+        const res = await refreshToken(authInfo).unwrap()
+
+        // save refreshed token to the state and local storage
+        dispatch(updateAuthInfoToken(res))
+    }, [refreshToken, authInfo, dispatch])
+
+    // fetch authorized user account data
+    const [getAccount] = useGetAccountMutation()
+    const initAccountData = useCallback(async () => {
+        try {
+            const res = await getAccount(authInfo).unwrap()
+            dispatch(setAccountInfo(res))
+        } catch (err) {
+            console.log(err)
+
+            // if token has exipred, initialize refresh token feature
+            if (err.data === 'The access token expired') {
+                runRefreshToken()
+            }
+        }
+    }, [getAccount, authInfo, dispatch, runRefreshToken])
+
+    // on init get account data
     useEffect(() => {
-        console.log('auth info has changed')
+        initAccountData()
+    }, [initAccountData])
+
+    // on authInfo change check authInfo status and select display mode
+    useEffect(() => {
         if (authInfo) setAuthMode(false)
         if (!authInfo) setAuthMode(true)
     }, [authInfo])
@@ -89,7 +123,11 @@ const Navbar = () => {
                             className="img-dropdown"
                         >
                             <Image
-                                src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                                src={
+                                    accountInfo?.images
+                                        ? accountInfo.images[0].url
+                                        : ''
+                                }
                                 roundedCircle
                                 className="img-box"
                             />

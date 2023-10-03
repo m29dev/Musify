@@ -1,16 +1,15 @@
 import Navbar from '../components/navbar'
 import { useDispatch } from 'react-redux'
 import { setAuthInfo } from '../redux/authSlice'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        console.log('auth page reached')
-
+    // reads and saves user authorization token and credentials
+    const initAuthInfo = useCallback(() => {
         const queryParams = new URLSearchParams(window.location.search)
         const access_token = queryParams.get('access_token')
         const token_type = queryParams.get('token_type')
@@ -28,7 +27,6 @@ const Auth = () => {
         ) {
             dispatch(
                 setAuthInfo({
-                    queryParams,
                     access_token,
                     token_type,
                     expires_in,
@@ -40,6 +38,12 @@ const Auth = () => {
 
         navigate('/home')
     }, [dispatch, navigate])
+
+    // on init
+    useEffect(() => {
+        // init authotrization
+        initAuthInfo()
+    }, [initAuthInfo])
 
     return (
         <>

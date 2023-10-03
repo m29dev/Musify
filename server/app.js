@@ -6,6 +6,7 @@ const dotenv = require('dotenv')
 const dbConnect = require('./config/dbConfig')
 const authRoutes = require('./routes/authRoutes')
 const accountRoutes = require('./routes/accountRoutes')
+const musicRoutes = require('./routes/musicRoutes')
 const http = require('http')
 
 dotenv.config()
@@ -24,3 +25,4 @@ server.listen(3000, () => {
 //routes
 app.use(authRoutes)
 app.use(accountRoutes)
+app.use(musicRoutes)

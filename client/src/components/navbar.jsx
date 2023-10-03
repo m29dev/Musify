@@ -3,7 +3,12 @@ import { Image, Dropdown } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useGetAccountMutation } from '../services/accountService'
-import { setAccountInfo, updateAuthInfoToken } from '../redux/authSlice'
+import {
+    clearAccountInfo,
+    clearAuthInfo,
+    setAccountInfo,
+    updateAuthInfoToken,
+} from '../redux/authSlice'
 import { useRefreshTokenMutation } from '../services/authService'
 
 const Navbar = () => {
@@ -22,6 +27,13 @@ const Navbar = () => {
     }
     const navTo = (query) => {
         navigate(`/${query}`)
+    }
+
+    // sign out
+    const signOut = () => {
+        // clear local storage info
+        dispatch(clearAuthInfo())
+        dispatch(clearAccountInfo())
     }
 
     // refresh token
@@ -134,8 +146,16 @@ const Navbar = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item>Account Settings</Dropdown.Item>
-                            <Dropdown.Item>Sign Out</Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    navTo(`account/${accountInfo.id}`)
+                                }}
+                            >
+                                Account Settings
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={signOut}>
+                                Sign Out
+                            </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

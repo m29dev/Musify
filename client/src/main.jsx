@@ -14,6 +14,10 @@ import App from './App'
 import Home from './pages/home'
 import Search from './pages/Search'
 import Auth from './pages/Auth'
+import Playlists from './pages/Playlists'
+import Albums from './pages/Albums'
+import AlbumDetails from './pages/AlbumDetails'
+import PlaylistDetails from './pages/PlaylistDetails'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,6 +27,10 @@ const router = createBrowserRouter(
             <Route path="auth" element={<Auth />}></Route>
             <Route path="home" element={<Home />}></Route>
             <Route path="search" element={<Search />}></Route>
+            <Route path="playlists" element={<Playlists />}></Route>
+            <Route path="playlists/:id" element={<PlaylistDetails />}></Route>
+            <Route path="albums" element={<Albums />}></Route>
+            <Route path="albums/:id" element={<AlbumDetails />}></Route>
 
             <Route path="*" element={<h1>404</h1>}></Route>
         </Route>

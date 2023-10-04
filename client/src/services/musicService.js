@@ -4,6 +4,7 @@ const MUSIC_URL = '/music'
 
 export const musicApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        // playlists
         getAllPlaylists: builder.mutation({
             query: (authInfo) => ({
                 url: `${MUSIC_URL}/playlists/${authInfo.access_token}`,
@@ -11,13 +12,33 @@ export const musicApiSlice = apiSlice.injectEndpoints({
             }),
         }),
         getPlaylistId: builder.mutation({
+            query: (data) => ({
+                url: `${MUSIC_URL}/playlists/${data.authInfo.access_token}`,
+                method: 'POST',
+                body: { id: data.id },
+            }),
+        }),
+
+        // albums
+        getAllAlbums: builder.mutation({
             query: (authInfo) => ({
-                url: `${MUSIC_URL}/playlists/${authInfo.access_token}/${authInfo.id}`,
+                url: `${MUSIC_URL}/albums/${authInfo.access_token}`,
                 method: 'GET',
+            }),
+        }),
+        getAlbumId: builder.mutation({
+            query: (data) => ({
+                url: `${MUSIC_URL}/albums/${data.authInfo.access_token}`,
+                method: 'POST',
+                body: { id: data.id },
             }),
         }),
     }),
 })
 
-export const { useGetAllPlaylistsMutation, useGetPlaylistIdMutation } =
-    musicApiSlice
+export const {
+    useGetAllPlaylistsMutation,
+    useGetPlaylistIdMutation,
+    useGetAllAlbumsMutation,
+    useGetAlbumIdMutation,
+} = musicApiSlice

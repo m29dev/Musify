@@ -112,8 +112,9 @@ svg {
 
 .center-box {
     min-width: 1000px;
+    width: 1000px;
     height: 100%;
-    padding: 18px;
+    padding: 23px;
     border-radius: 18px;
     background: rgb(27, 27, 27);
     background: linear-gradient(
@@ -123,6 +124,17 @@ svg {
     );
     overflow: auto;
 }
+/* .navbar-box-playlist {
+    height: 300px;
+    width: 100%;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 70%;
+} */
 
 /* HOME PAGE */
 .home-box {
@@ -153,10 +165,116 @@ svg {
     margin-bottom: 12px;
 }
 .card-text {
+    height: 75px;
     color: rgb(200, 200, 200);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: wrap;
 }
 .card-img-box {
     padding: 16px;
     padding-bottom: 0px;
     border-radius: 20px;
+}
+
+/* PLAYLISTS */
+.playlist-details-navbar {
+    margin-top: 30px;
+    display: flex;
+}
+/* playlist id detail */
+.playlist-details-img-box {
+    width: 230px;
+    height: 230px;
+    -webkit-box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
+    -moz-box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
+    box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
+}
+.playlist-details-info {
+    width: 100%;
+    padding: 23px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.playlist-name {
+    width: 100%;
+    font-size: 5em;
+    font-weight: bold;
+}
+.playlist-description {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(212, 212, 214);
+}
+.playlist-author {
+    font-size: 14px;
+    font-weight: 500;
+}
+.table-box {
+    padding: 0px;
+}
+.table-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px gray;
+    padding: 16px;
+    padding-bottom: 4px;
+    color: #b3b3b3;
+}
+
+.table-item {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 16px;
+}
+.index {
+    width: 16px;
+    text-align: end;
+    color: #b3b3b3;
+}
+.title {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+.title-artists-box {
+    display: flex;
+}
+.title h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.title h4 {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0px;
+    margin-right: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.album {
+    width: 40%;
+}
+.time {
+    width: 50px;
+    text-align: end;
+    color: #b3b3b3;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }

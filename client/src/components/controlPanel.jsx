@@ -1,43 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setControlPanelInfo } from '../redux/authSlice'
-import { useState } from 'react'
+import { setPlayVideo } from '../redux/authSlice'
 
 const ControlPanel = () => {
     const { songInfo } = useSelector((state) => state.auth)
     const { controlPanelInfo } = useSelector((state) => state.auth)
-    const { currentDuration, setCurrentDuration } = useState(null)
-
     const dispatch = useDispatch()
 
-    let countProgress = controlPanelInfo.durationVideo
-    function fancyTimeFormat(duration) {
-        // Hours, minutes and seconds
-        const mins = ~~((duration % 3600) / 60)
-        const secs = ~~duration % 60
-
-        // Output like "1:01" or "4:03:59" or "123:03:59"
-        let ret = ''
-
-        ret += '' + mins + ':' + (secs < 10 ? '0' : '')
-        ret += '' + secs
-
-        //dispatch(setControlPanelInfo({ durationVideo: ret }))
-        console.log(ret)
-        setCurrentDuration(ret)
-    }
-
-    const durationProgress = (e) => {
-        countProgress = Math.trunc(e.playedSeconds)
-        fancyTimeFormat(countProgress)
-    }
-
-    const updateControlPanelInfo = (boolean) => {
-        dispatch(
-            setControlPanelInfo({
-                playVideo: boolean,
-                durationVideo: countProgress,
-            })
-        )
+    const updatePlayVideo = (boolean) => {
+        dispatch(setPlayVideo(boolean))
     }
 
     return (
@@ -67,19 +37,19 @@ const ControlPanel = () => {
 
                 <button
                     onClick={() => {
-                        updateControlPanelInfo(true)
+                        updatePlayVideo(true)
                     }}
                 >
                     Play
                 </button>
                 <button
                     onClick={() => {
-                        updateControlPanelInfo(false)
+                        updatePlayVideo(false)
                     }}
                 >
                     Stop
                 </button>
-                <p>{currentDuration}</p>
+                <p>{controlPanelInfo?.durationVideo}</p>
             </div>
         </>
     )

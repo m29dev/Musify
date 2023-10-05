@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import ControlPanel from './controlPanel'
+import YoutubePlayer from './youtubePlayer'
 
 const Rightbar = () => {
     const { songInfo } = useSelector((state) => state.auth)
@@ -8,7 +8,7 @@ const Rightbar = () => {
         <>
             <div className="bar-box rightbar">
                 <div className="rightbar-img-box">
-                    <ControlPanel></ControlPanel>
+                    <YoutubePlayer></YoutubePlayer>
                 </div>
 
                 <h1>{songInfo?.data?.name}</h1>

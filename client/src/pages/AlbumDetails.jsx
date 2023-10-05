@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import DetailsBox from '../components/detailsBox'
 import Navbar from '../components/navbar'
+import ControlPanel from '../components/controlPanel'
 
 const AlbumDetails = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -32,7 +33,12 @@ const AlbumDetails = () => {
             <div className="center-box">
                 {/* navbar main */}
                 <Navbar></Navbar>
+
+                {/* album details */}
                 {album && <DetailsBox playlist={album}></DetailsBox>}
+
+                {/* control panel */}
+                <ControlPanel></ControlPanel>
             </div>
         </>
     )

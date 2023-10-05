@@ -13,8 +13,9 @@ const Home = () => {
         >
             {/* navbar main */}
             <Navbar></Navbar>
-            {/* player */}
-            {/* <ControlPanel></ControlPanel> */}
+
+            {/* control panel bar */}
+            <ControlPanel></ControlPanel>
         </div>
     )
 }

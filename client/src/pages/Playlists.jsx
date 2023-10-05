@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import CardComponent from '../components/card'
 import Navbar from '../components/navbar'
 import { Container } from 'react-bootstrap'
+import ControlPanel from '../components/controlPanel'
 
 const Playlists = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -41,6 +42,8 @@ const Playlists = () => {
                         )
                     })}
                 </Container>
+
+                <ControlPanel></ControlPanel>
             </div>
         </>
     )

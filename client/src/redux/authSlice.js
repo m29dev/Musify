@@ -13,9 +13,10 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('songInfo'))
         : null,
 
-    controlPanelInfo: localStorage.getItem('controlPanelInfo')
-        ? JSON.parse(localStorage.getItem('controlPanelInfo'))
-        : null,
+    controlPanelInfo: {
+        playVideo: true,
+        durationVideo: 0,
+    },
 }
 
 export const authSlice = createSlice({
@@ -53,12 +54,11 @@ export const authSlice = createSlice({
         },
 
         // control panel
-        setControlPanelInfo: (state, action) => {
-            state.controlPanelInfo = action.payload
-            localStorage.setItem(
-                'controlPanelInfo',
-                JSON.stringify(action.payload)
-            )
+        setPlayVideo: (state, action) => {
+            state.controlPanelInfo.playVideo = action.payload
+        },
+        setDurationVideo: (state, action) => {
+            state.controlPanelInfo.durationVideo = action.payload
         },
     },
 })
@@ -70,6 +70,7 @@ export const {
     setAccountInfo,
     clearAccountInfo,
     setSongInfo,
-    setControlPanelInfo,
+    setPlayVideo,
+    setDurationVideo,
 } = authSlice.actions
 export default authSlice.reducer

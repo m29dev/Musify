@@ -59,145 +59,157 @@ const DetailsBox = (playlistData) => {
 
     return (
         <>
-            {/* navbar */}
-            <div className="playlist-details-navbar">
-                {/* image */}
-                <img
-                    src={playlist?.images ? playlist?.images[0]?.url : ''}
-                    alt=""
-                    className="playlist-details-img-box"
-                />
+            <div
+                style={{
+                    maxHeight: '100%',
+                    overflow: 'auto',
+                    margin: '23px 0px',
+                }}
+            >
+                {/* navbar */}
+                <div className="playlist-details-navbar">
+                    {/* image */}
+                    <img
+                        src={playlist?.images ? playlist?.images[0]?.url : ''}
+                        alt=""
+                        className="playlist-details-img-box"
+                    />
 
-                {/* details */}
-                <div className="playlist-details-info">
-                    {/* name */}
-                    <div
-                        className={
-                            playlist?.name?.length > 14
-                                ? 'playlist-name-long'
-                                : 'playlist-name'
-                        }
-                    >
-                        {playlist?.name}
+                    {/* details */}
+                    <div className="playlist-details-info">
+                        {/* name */}
+                        <div
+                            className={
+                                playlist?.name?.length > 14
+                                    ? 'playlist-name-long'
+                                    : 'playlist-name'
+                            }
+                        >
+                            {playlist?.name}
+                        </div>
+
+                        {/* description */}
+                        {playlist?.description && (
+                            <div className="playlist-description">
+                                {parse(`${playlist?.description}`)}
+                            </div>
+                        )}
+
+                        {/* author, songs amount, followers amount */}
+                        {/* owner if it's playlist */}
+                        {playlist?.owner && (
+                            <div className="playlist-author">
+                                <p
+                                    onClick={() => {
+                                        navTo(playlist?.owner?.id)
+                                    }}
+                                >
+                                    {playlist?.owner.display_name}
+                                </p>
+                                {` - ${playlist?.tracks?.items?.length} songs - ${playlist?.followers?.total} likes`}
+                            </div>
+                        )}
+
+                        {/* artist / artists if it's album */}
+                        {playlist?.artists && (
+                            <div className="playlist-author">
+                                {playlist?.artists?.map((artist) => (
+                                    <p key={artist.name}>{artist.name}</p>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* playlists songs */}
+                <div className="table-box">
+                    {/* table nav */}
+                    <div className="table-nav">
+                        <div className="column index">#</div>
+                        <div className="column title">Title</div>
+                        {playlist?.type === 'playlist' ? (
+                            <div className="column album">Album</div>
+                        ) : (
+                            <div className="column album"></div>
+                        )}
+                        <div className="column time">Time</div>
                     </div>
 
-                    {/* description */}
-                    {playlist?.description && (
-                        <div className="playlist-description">
-                            {parse(`${playlist?.description}`)}
-                        </div>
-                    )}
-
-                    {/* author, songs amount, followers amount */}
-                    {/* owner if it's playlist */}
-                    {playlist?.owner && (
-                        <div className="playlist-author">
-                            <p
+                    {/* table items */}
+                    {playlist?.tracks?.items?.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className="table-item"
                                 onClick={() => {
-                                    navTo(playlist?.owner?.id)
+                                    runPlayer(item)
                                 }}
                             >
-                                {playlist?.owner.display_name}
-                            </p>
-                            {` - ${playlist?.tracks?.items?.length} songs - ${playlist?.followers?.total} likes`}
-                        </div>
-                    )}
+                                {/* id */}
+                                <div className="column index">{index + 1}</div>
 
-                    {/* artist / artists if it's album */}
-                    {playlist?.artists && (
-                        <div className="playlist-author">
-                            {playlist?.artists?.map((artist) => (
-                                <p key={artist.name}>{artist.name}</p>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </div>
+                                {/* title */}
+                                <div className="column title">
+                                    {/* if playlist */}
+                                    {item?.track && (
+                                        <>
+                                            <h1>{item?.track?.name}</h1>
 
-            {/* playlists songs */}
-            <div className="table-box">
-                {/* table nav */}
-                <div className="table-nav">
-                    <div className="column index">#</div>
-                    <div className="column title">Title</div>
-                    {playlist?.type === 'playlist' ? (
-                        <div className="column album">Album</div>
-                    ) : (
-                        <div className="column album"></div>
-                    )}
-                    <div className="column time">Time</div>
-                </div>
+                                            <div className="title-artists-box">
+                                                {item?.track?.artists.map(
+                                                    (artist) => {
+                                                        return (
+                                                            <h4
+                                                                key={
+                                                                    artist?.name
+                                                                }
+                                                            >
+                                                                {artist?.name}
+                                                            </h4>
+                                                        )
+                                                    }
+                                                )}
+                                            </div>
+                                        </>
+                                    )}
 
-                {/* table items */}
-                {playlist?.tracks?.items?.map((item, index) => {
-                    return (
-                        <div
-                            key={index}
-                            className="table-item"
-                            onClick={() => {
-                                runPlayer(item)
-                            }}
-                        >
-                            {/* id */}
-                            <div className="column index">{index + 1}</div>
+                                    {/* if album */}
+                                    {item?.name && (
+                                        <>
+                                            <h1>{item?.name}</h1>
 
-                            {/* title */}
-                            <div className="column title">
-                                {/* if playlist */}
-                                {item?.track && (
-                                    <>
-                                        <h1>{item?.track?.name}</h1>
-
-                                        <div className="title-artists-box">
-                                            {item?.track?.artists.map(
-                                                (artist) => {
+                                            <div className="title-artists-box">
+                                                {item?.artists.map((artist) => {
                                                     return (
                                                         <h4 key={artist?.name}>
                                                             {artist?.name}
                                                         </h4>
                                                     )
-                                                }
-                                            )}
-                                        </div>
-                                    </>
-                                )}
-
-                                {/* if album */}
-                                {item?.name && (
-                                    <>
-                                        <h1>{item?.name}</h1>
-
-                                        <div className="title-artists-box">
-                                            {item?.artists.map((artist) => {
-                                                return (
-                                                    <h4 key={artist?.name}>
-                                                        {artist?.name}
-                                                    </h4>
-                                                )
-                                            })}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-
-                            {/* Album */}
-                            {item?.track?.album ? (
-                                <div className="column album">
-                                    {item?.track?.album?.name}
+                                                })}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                            ) : (
-                                <div className="column album"></div>
-                            )}
 
-                            {/* Time */}
-                            {item?.track?.duration_ms &&
-                                convertTime(item?.track?.duration_ms)}
+                                {/* Album */}
+                                {item?.track?.album ? (
+                                    <div className="column album">
+                                        {item?.track?.album?.name}
+                                    </div>
+                                ) : (
+                                    <div className="column album"></div>
+                                )}
 
-                            {item?.duration_ms &&
-                                convertTime(item?.duration_ms)}
-                        </div>
-                    )
-                })}
+                                {/* Time */}
+                                {item?.track?.duration_ms &&
+                                    convertTime(item?.track?.duration_ms)}
+
+                                {item?.duration_ms &&
+                                    convertTime(item?.duration_ms)}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </>
     )

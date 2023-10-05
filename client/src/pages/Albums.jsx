@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Navbar from '../components/navbar'
 import { Container } from 'react-bootstrap'
 import CardComponent from '../components/card'
+import ControlPanel from '../components/controlPanel'
 
 const Albums = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -44,6 +45,9 @@ const Albums = () => {
                         )
                     })}
                 </Container>
+
+                {/* control panel bar */}
+                <ControlPanel></ControlPanel>
             </div>
         </>
     )

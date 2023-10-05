@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom'
 import './App.css'
 import Leftbar from './components/leftbar'
 import Rightbar from './components/rightbar'
-import ControlPanel from './components/controlPanel'
 
 const App = () => {
     return (
@@ -12,7 +11,6 @@ const App = () => {
                 <Outlet />
                 <Rightbar />
             </div>
-            {/* <ControlPanel></ControlPanel> */}
         </>
     )
 }

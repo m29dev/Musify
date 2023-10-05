@@ -18,7 +18,8 @@
     "multer-gridfs-storage": "^5.0.2",
     "querystring": "^0.2.1",
     "request": "^2.88.2",
-    "socket.io": "^4.6.2"
+    "socket.io": "^4.6.2",
+    "ytmusic-api": "^4.4.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

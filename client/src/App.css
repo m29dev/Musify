@@ -162,7 +162,12 @@ svg {
 }
 .card-title {
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+}
+.card-title.h5 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .card-text {
     height: 75px;
@@ -199,9 +204,16 @@ svg {
     justify-content: flex-end;
 }
 .playlist-name {
-    width: 100%;
+    width: 600;
     font-size: 5em;
     font-weight: bold;
+    text-wrap: nowrap;
+}
+.playlist-name-long {
+    width: 600;
+    font-size: 3em;
+    font-weight: bold;
+    text-wrap: nowrap;
 }
 .playlist-description {
     font-size: 14px;
@@ -277,4 +289,14 @@ a {
 }
 a:hover {
     text-decoration: underline;
+}
+
+/* control panel */
+.control-panel-box {
+    width: 100%;
+    border-radius: 20px;
+    background-color: #000000;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
 }

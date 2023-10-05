@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { useGetAllPlaylistsMutation } from '../services/musicService'
 import { useSelector } from 'react-redux'
 import CardComponent from '../components/card'
+import Navbar from '../components/navbar'
+import { Container } from 'react-bootstrap'
 
 const Playlists = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -24,13 +26,22 @@ const Playlists = () => {
 
     return (
         <>
-            {playlists?.map((playlist) => {
-                return (
-                    <div key={playlist?.name} className="home-box-item">
-                        <CardComponent playlist={playlist}></CardComponent>
-                    </div>
-                )
-            })}
+            <div className="center-box">
+                {/* navbar main */}
+                <Navbar></Navbar>
+
+                <Container fluid className="home-box">
+                    {playlists?.map((playlist) => {
+                        return (
+                            <div key={playlist?.name} className="home-box-item">
+                                <CardComponent
+                                    playlist={playlist}
+                                ></CardComponent>
+                            </div>
+                        )
+                    })}
+                </Container>
+            </div>
         </>
     )
 }

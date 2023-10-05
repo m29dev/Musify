@@ -126,6 +126,26 @@ const Navbar = () => {
                         >
                             Search
                         </div>
+
+                        {/* playlists */}
+                        <div
+                            className="navbar-box-btn"
+                            onClick={() => {
+                                navTo('playlists')
+                            }}
+                        >
+                            Playlists
+                        </div>
+
+                        {/* albums */}
+                        <div
+                            className="navbar-box-btn"
+                            onClick={() => {
+                                navTo('albums')
+                            }}
+                        >
+                            Albums
+                        </div>
                     </div>
 
                     {/* nav account */}

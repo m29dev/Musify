@@ -6,13 +6,14 @@ function CardComponent(playlist) {
     const playlistInfo = playlist
     const navigate = useNavigate()
 
+    const navTo = () => {
+        const type = playlistInfo?.playlist?.type
+        const id = playlistInfo.playlist.id
+        navigate(`/${type}s/${id}`)
+    }
+
     return (
-        <Card
-            className="card-item"
-            onClick={() => {
-                navigate(`/playlists/${playlistInfo.playlist.id}`)
-            }}
-        >
+        <Card className="card-item" onClick={navTo}>
             <Card.Img
                 variant="top"
                 src={playlistInfo?.playlist?.images[0]?.url}
@@ -21,9 +22,19 @@ function CardComponent(playlist) {
             <Card.Body>
                 <Card.Title>{playlistInfo?.playlist?.name}</Card.Title>
 
-                <Card.Text>
-                    {parse(playlistInfo?.playlist?.description)}
-                </Card.Text>
+                {playlistInfo?.playlist?.description && (
+                    <Card.Text>
+                        {parse(`${playlistInfo?.playlist?.description}`)}
+                    </Card.Text>
+                )}
+
+                {playlistInfo?.playlist?.artists && (
+                    <div>
+                        {playlistInfo?.playlist?.artists.map((artist) => (
+                            <p key={artist?.name}>{artist?.name}</p>
+                        ))}
+                    </div>
+                )}
             </Card.Body>
         </Card>
     )

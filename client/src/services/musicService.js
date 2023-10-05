@@ -33,6 +33,14 @@ export const musicApiSlice = apiSlice.injectEndpoints({
                 body: { id: data.id },
             }),
         }),
+
+        // songs
+        getSongId: builder.mutation({
+            query: (query) => ({
+                url: `${MUSIC_URL}/youtube/${query}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -41,4 +49,5 @@ export const {
     useGetPlaylistIdMutation,
     useGetAllAlbumsMutation,
     useGetAlbumIdMutation,
+    useGetSongIdMutation,
 } = musicApiSlice

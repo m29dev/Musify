@@ -8,6 +8,14 @@ const initialState = {
     accountInfo: localStorage.getItem('accountInfo')
         ? JSON.parse(localStorage.getItem('accountInfo'))
         : null,
+
+    songInfo: localStorage.getItem('songInfo')
+        ? JSON.parse(localStorage.getItem('songInfo'))
+        : null,
+
+    controlPanelInfo: localStorage.getItem('controlPanelInfo')
+        ? JSON.parse(localStorage.getItem('controlPanelInfo'))
+        : null,
 }
 
 export const authSlice = createSlice({
@@ -37,6 +45,21 @@ export const authSlice = createSlice({
             state.accountInfo = null
             localStorage.removeItem('accountInfo')
         },
+
+        // song information
+        setSongInfo: (state, action) => {
+            state.songInfo = action.payload
+            localStorage.setItem('songInfo', JSON.stringify(action.payload))
+        },
+
+        // control panel
+        setControlPanelInfo: (state, action) => {
+            state.controlPanelInfo = action.payload
+            localStorage.setItem(
+                'controlPanelInfo',
+                JSON.stringify(action.payload)
+            )
+        },
     },
 })
 
@@ -46,5 +69,7 @@ export const {
     clearAuthInfo,
     setAccountInfo,
     clearAccountInfo,
+    setSongInfo,
+    setControlPanelInfo,
 } = authSlice.actions
 export default authSlice.reducer

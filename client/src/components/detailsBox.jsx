@@ -27,30 +27,33 @@ const DetailsBox = (playlistData) => {
     }
 
     const [getSong] = useGetSongIdMutation()
-    const runPlayer = async (data) => {
+    const runPlayer = async (playlist, index) => {
         // if track's from playlist
-        if (data?.track?.name) {
-            const res = await getSong(
-                `${data?.track?.artists[0]?.name} - ${data?.track?.name}`
-            ).unwrap()
+        if (playlist?.type === 'playlist') {
+            const song = playlist?.tracks?.items[index]?.track
+            const songArtist = song?.artists[0]?.name
+            const songName = song?.name
 
-            const resObject = { data: data?.track, res: res }
-            console.log(resObject)
-
-            dispatch(setSongInfo(resObject))
+            const res = await getSong(`${songArtist} - ${songName}`).unwrap()
+            const songInfoObject = {
+                index,
+                spotify_playlist: playlist,
+                spotify_song: song,
+                youtube_song: res,
+            }
+            console.log(songInfoObject)
+            dispatch(setSongInfo(songInfoObject))
         }
 
         // if track's from album
-        if (data?.name) {
-            const res = await getSong(
-                `${data?.artists[0]?.name} - ${data?.name}`
-            ).unwrap()
-
-            const resObject = { data: data, res: res }
-            console.log(resObject)
-
-            dispatch(setSongInfo(resObject))
-        }
+        // if (data?.name) {
+        //     const res = await getSong(
+        //         `${data?.artists[0]?.name} - ${data?.name}`
+        //     ).unwrap()
+        //     const resObject = { data: data, res: res }
+        //     console.log(resObject)
+        //     dispatch(setSongInfo(resObject))
+        // }
     }
 
     useEffect(() => {
@@ -142,7 +145,7 @@ const DetailsBox = (playlistData) => {
                                 key={index}
                                 className="table-item"
                                 onClick={() => {
-                                    runPlayer(item)
+                                    runPlayer(playlist, index)
                                 }}
                             >
                                 {/* id */}

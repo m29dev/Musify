@@ -99,7 +99,7 @@ svg {
 }
 
 .rightbar h4 {
-    color: azure;
+    color: #b3b3b3;
 }
 
 .rightbar-img-box {
@@ -304,5 +304,71 @@ a:hover {
     background-color: #000000;
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
+.control-panel-title {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-self: start;
+}
+.control-panel-btn-box {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    align-self: center;
+}
+.control-panel-title h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.control-panel-title h4 {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0px;
+    margin-right: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.control-panel-btn {
+    width: 30px;
+    height: 30px;
+}
+svg.control-panel-btn {
+    margin: 0px;
+}
+.control-panel-upper {
+    width: 100%;
+    display: flex;
+}
+.control-panel-lower {
+    width: 100%;
+    display: flex;
+}
+.control-panel-lower input {
+    width: 100%;
+}
+.control-panel-current-duration {
+    width: 10%;
+    align-self: center;
+    display: flex;
+    justify-content: flex-start;
+}
+.control-panel-duration {
+    width: 10%;
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+}
+.control-panel-range {
+    background-color: #b3b3b3;
+    color: black;
+}
+
+/* INPUT RANGE */

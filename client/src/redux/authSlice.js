@@ -9,12 +9,20 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('accountInfo'))
         : null,
 
+    // spotify_playlist
+    // spotify_song
+    // youtube_song
     songInfo: localStorage.getItem('songInfo')
         ? JSON.parse(localStorage.getItem('songInfo'))
         : null,
 
     controlPanelInfo: {
         playVideo: true,
+        durationVideo: 0,
+        volumeVideo: 0.5,
+    },
+
+    onChangeDuration: {
         durationVideo: 0,
     },
 }
@@ -60,6 +68,12 @@ export const authSlice = createSlice({
         setDurationVideo: (state, action) => {
             state.controlPanelInfo.durationVideo = action.payload
         },
+        setVolumeVideo: (state, action) => {
+            state.controlPanelInfo.volumeVideo = action.payload
+        },
+        setOnChangeDuration: (state, action) => {
+            state.onChangeDuration.durationVideo = action.payload
+        },
     },
 })
 
@@ -72,5 +86,7 @@ export const {
     setSongInfo,
     setPlayVideo,
     setDurationVideo,
+    setVolumeVideo,
+    setOnChangeDuration,
 } = authSlice.actions
 export default authSlice.reducer

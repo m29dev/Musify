@@ -11,8 +11,8 @@ const Rightbar = () => {
                     <YoutubePlayer></YoutubePlayer>
                 </div>
 
-                <h1>{songInfo?.data?.name}</h1>
-                <h4>{songInfo?.data?.artists[0]?.name}</h4>
+                <h1>{songInfo?.spotify_song?.name}</h1>
+                <h4>{songInfo?.spotify_song?.artists[0]?.name}</h4>
                 <h5></h5>
             </div>
         </>

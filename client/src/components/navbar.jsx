@@ -10,6 +10,13 @@ import {
     updateAuthInfoToken,
 } from '../redux/authSlice'
 import { useRefreshTokenMutation } from '../services/authService'
+import {
+    IoIosArrowDropleftCircle,
+    IoIosArrowDroprightCircle,
+} from 'react-icons/io'
+import { BiHomeAlt2, BiSolidPlaylist } from 'react-icons/bi'
+import { AiOutlineSearch } from 'react-icons/ai'
+import { LuAlbum } from 'react-icons/lu'
 
 const Navbar = () => {
     const [authMode, setAuthMode] = useState(false)
@@ -81,30 +88,12 @@ const Navbar = () => {
                     <div className="navbar-box-item">
                         {/* arrow left */}
                         <div className="btn-arrow" onClick={navBack}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="25"
-                                height="25"
-                                fill="currentColor"
-                                className="bi bi-caret-left"
-                                viewBox="0 0 16 16"
-                            >
-                                <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
-                            </svg>
+                            <IoIosArrowDropleftCircle className="control-panel-btn"></IoIosArrowDropleftCircle>
                         </div>
 
                         {/* arrow right */}
                         <div className="btn-arrow" onClick={navForward}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="25"
-                                height="25"
-                                fill="currentColor"
-                                className="bi bi-caret-right"
-                                viewBox="0 0 16 16"
-                            >
-                                <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
-                            </svg>
+                            <IoIosArrowDroprightCircle className="control-panel-btn"></IoIosArrowDroprightCircle>
                         </div>
 
                         {/* home */}
@@ -114,6 +103,7 @@ const Navbar = () => {
                                 navTo('home')
                             }}
                         >
+                            <BiHomeAlt2 className="control-panel-btn"></BiHomeAlt2>
                             Home
                         </div>
 
@@ -124,6 +114,7 @@ const Navbar = () => {
                                 navTo('search')
                             }}
                         >
+                            <AiOutlineSearch className="control-panel-btn"></AiOutlineSearch>
                             Search
                         </div>
 
@@ -134,6 +125,7 @@ const Navbar = () => {
                                 navTo('playlists')
                             }}
                         >
+                            <BiSolidPlaylist className="control-panel-btn"></BiSolidPlaylist>
                             Playlists
                         </div>
 
@@ -144,6 +136,7 @@ const Navbar = () => {
                                 navTo('albums')
                             }}
                         >
+                            <LuAlbum className="control-panel-btn"></LuAlbum>
                             Albums
                         </div>
                     </div>

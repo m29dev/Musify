@@ -22,8 +22,14 @@ const YoutubePlayer = () => {
                 index = -1
             }
 
-            const song =
-                songInfo.spotify_playlist?.tracks?.items[index + 1]?.track
+            let song
+            if (songInfo?.spotify_playlist?.type === 'playlist') {
+                song =
+                    songInfo.spotify_playlist?.tracks?.items[index + 1]?.track
+            }
+            if (songInfo?.spotify_playlist?.type === 'album') {
+                song = songInfo.spotify_playlist?.tracks?.items[index + 1]
+            }
             const songArtist = song?.artists[0]?.name
             const songName = song?.name
 

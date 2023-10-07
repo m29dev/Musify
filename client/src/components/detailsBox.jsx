@@ -46,14 +46,21 @@ const DetailsBox = (playlistData) => {
         }
 
         // if track's from album
-        // if (data?.name) {
-        //     const res = await getSong(
-        //         `${data?.artists[0]?.name} - ${data?.name}`
-        //     ).unwrap()
-        //     const resObject = { data: data, res: res }
-        //     console.log(resObject)
-        //     dispatch(setSongInfo(resObject))
-        // }
+        if (playlist?.type === 'album') {
+            const song = playlist?.tracks?.items[index]
+            const songArtist = song?.artists[0]?.name
+            const songName = song?.name
+
+            const res = await getSong(`${songArtist} - ${songName}`).unwrap()
+            const songInfoObject = {
+                index,
+                spotify_playlist: playlist,
+                spotify_song: song,
+                youtube_song: res,
+            }
+            console.log(songInfoObject)
+            dispatch(setSongInfo(songInfoObject))
+        }
     }
 
     useEffect(() => {
@@ -106,10 +113,17 @@ const DetailsBox = (playlistData) => {
                                     onClick={() => {
                                         navTo(playlist?.owner?.id)
                                     }}
+                                    style={{
+                                        margin: '0px',
+                                        marginRight: '4px',
+                                    }}
                                 >
                                     {playlist?.owner.display_name}
                                 </p>
-                                {` - ${playlist?.tracks?.items?.length} songs - ${playlist?.followers?.total} likes`}
+                                {` - ${playlist?.tracks?.items?.length} songs`}
+                                {playlist?.followers?.total > 0
+                                    ? ` - ${playlist?.followers?.total} likes`
+                                    : ``}
                             </div>
                         )}
 

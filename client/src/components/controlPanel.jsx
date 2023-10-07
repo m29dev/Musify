@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
+    setDurationVideo,
     setOnChangeDuration,
     setPlayVideo,
     setSongInfo,
@@ -8,8 +9,8 @@ import {
 import { useGetSongIdMutation } from '../services/musicService'
 import { BsFillPlayCircleFill, BsFillPauseCircleFill } from 'react-icons/bs'
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
+import { BsFillVolumeDownFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
-import FormRange from 'react-bootstrap/FormRange'
 
 const ControlPanel = () => {
     const { songInfo } = useSelector((state) => state.auth)
@@ -18,26 +19,46 @@ const ControlPanel = () => {
     const [getSong] = useGetSongIdMutation()
     const [duration, setDuration] = useState(0)
 
-    const nextSong = async () => {
+    const changeSong = async (direction) => {
         try {
             let index = songInfo?.index
-            // check if current song is last playlist's item
+
+            // check if current song is last playlist's item and direction is next
             if (
                 index ===
-                songInfo?.spotify_playlist?.tracks?.items?.length - 1
+                    songInfo?.spotify_playlist?.tracks?.items?.length - 1 &&
+                direction === 'next'
             ) {
                 index = -1
             }
 
-            const song =
-                songInfo.spotify_playlist?.tracks?.items[index + 1]?.track
+            // check if current song is first playlist's item and direction is previous
+            if (index === 0 && direction === 'previous') {
+                index = songInfo?.spotify_playlist?.tracks?.items?.length
+            }
+
+            let song
+            if (songInfo?.spotify_playlist?.type === 'playlist') {
+                song =
+                    direction === 'next'
+                        ? songInfo.spotify_playlist?.tracks?.items[index + 1]
+                              ?.track
+                        : songInfo.spotify_playlist?.tracks?.items[index - 1]
+                              ?.track
+            }
+            if (songInfo?.spotify_playlist?.type === 'album') {
+                song =
+                    direction === 'next'
+                        ? songInfo.spotify_playlist?.tracks?.items[index + 1]
+                        : songInfo.spotify_playlist?.tracks?.items[index - 1]
+            }
             const songArtist = song?.artists[0]?.name
             const songName = song?.name
 
             const res = await getSong(`${songArtist} - ${songName}`).unwrap()
 
             const songInfoObject = {
-                index: index + 1,
+                index: direction === 'next' ? index + 1 : index - 1,
                 spotify_playlist: songInfo.spotify_playlist,
                 spotify_song: song,
                 youtube_song: res,
@@ -46,7 +67,7 @@ const ControlPanel = () => {
             console.log(songInfoObject)
 
             dispatch(setSongInfo(songInfoObject))
-            dispatch(controlPanelInfo.durationVideo(`0:00`))
+            dispatch(setDurationVideo(0))
         } catch (err) {
             console.log(err)
         }
@@ -107,7 +128,12 @@ const ControlPanel = () => {
 
                     <div className="control-panel-btn-box">
                         {/* PREVIOUS BTN */}
-                        <BiSkipPrevious className="control-panel-btn"></BiSkipPrevious>
+                        <BiSkipPrevious
+                            className="control-panel-btn"
+                            onClick={() => {
+                                changeSong('previous')
+                            }}
+                        ></BiSkipPrevious>
 
                         {/* PLAY BTN */}
                         <BsFillPlayCircleFill
@@ -129,12 +155,13 @@ const ControlPanel = () => {
                         <BiSkipNext
                             className="control-panel-btn"
                             onClick={() => {
-                                nextSong()
+                                changeSong('next')
                             }}
                         ></BiSkipNext>
                     </div>
 
-                    <div>
+                    <div className="control-panel-volume-box">
+                        <BsFillVolumeDownFill className="control-panel-btn"></BsFillVolumeDownFill>
                         <input
                             type="range"
                             min={0}

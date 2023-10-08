@@ -25,6 +25,8 @@ const initialState = {
     onChangeDuration: {
         durationVideo: 0,
     },
+
+    fullScreenMode: false,
 }
 
 export const authSlice = createSlice({
@@ -74,6 +76,11 @@ export const authSlice = createSlice({
         setOnChangeDuration: (state, action) => {
             state.onChangeDuration.durationVideo = action.payload
         },
+
+        // fullscreen
+        setFullScreenMode: (state, action) => {
+            state.fullScreenMode = action.payload
+        },
     },
 })
 
@@ -88,5 +95,6 @@ export const {
     setDurationVideo,
     setVolumeVideo,
     setOnChangeDuration,
+    setFullScreenMode,
 } = authSlice.actions
 export default authSlice.reducer

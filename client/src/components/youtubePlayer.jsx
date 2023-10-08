@@ -47,6 +47,9 @@ const YoutubePlayer = () => {
             dispatch(setSongInfo(songInfoObject))
         } catch (err) {
             console.log(err)
+            if (err.data.message) {
+                window.alert(err.data.message)
+            }
         }
     }
 

@@ -142,7 +142,7 @@ const Navbar = () => {
                     </div>
 
                     {/* nav account */}
-                    <Dropdown>
+                    <Dropdown style={{ padding: '0px' }}>
                         <Dropdown.Toggle
                             variant="none"
                             className="img-dropdown"

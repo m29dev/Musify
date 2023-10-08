@@ -28,38 +28,49 @@ const DetailsBox = (playlistData) => {
 
     const [getSong] = useGetSongIdMutation()
     const runPlayer = async (playlist, index) => {
-        // if track's from playlist
-        if (playlist?.type === 'playlist') {
-            const song = playlist?.tracks?.items[index]?.track
-            const songArtist = song?.artists[0]?.name
-            const songName = song?.name
+        try {
+            // if track's from playlist
+            if (playlist?.type === 'playlist') {
+                const song = playlist?.tracks?.items[index]?.track
+                const songArtist = song?.artists[0]?.name
+                const songName = song?.name
 
-            const res = await getSong(`${songArtist} - ${songName}`).unwrap()
-            const songInfoObject = {
-                index,
-                spotify_playlist: playlist,
-                spotify_song: song,
-                youtube_song: res,
+                const res = await getSong(
+                    `${songArtist} - ${songName}`
+                ).unwrap()
+                const songInfoObject = {
+                    index,
+                    spotify_playlist: playlist,
+                    spotify_song: song,
+                    youtube_song: res,
+                }
+                console.log(songInfoObject)
+                dispatch(setSongInfo(songInfoObject))
             }
-            console.log(songInfoObject)
-            dispatch(setSongInfo(songInfoObject))
-        }
 
-        // if track's from album
-        if (playlist?.type === 'album') {
-            const song = playlist?.tracks?.items[index]
-            const songArtist = song?.artists[0]?.name
-            const songName = song?.name
+            // if track's from album
+            if (playlist?.type === 'album') {
+                const song = playlist?.tracks?.items[index]
+                const songArtist = song?.artists[0]?.name
+                const songName = song?.name
 
-            const res = await getSong(`${songArtist} - ${songName}`).unwrap()
-            const songInfoObject = {
-                index,
-                spotify_playlist: playlist,
-                spotify_song: song,
-                youtube_song: res,
+                const res = await getSong(
+                    `${songArtist} - ${songName}`
+                ).unwrap()
+                const songInfoObject = {
+                    index,
+                    spotify_playlist: playlist,
+                    spotify_song: song,
+                    youtube_song: res,
+                }
+                console.log(songInfoObject)
+                dispatch(setSongInfo(songInfoObject))
             }
-            console.log(songInfoObject)
-            dispatch(setSongInfo(songInfoObject))
+        } catch (err) {
+            console.log(err)
+            if (err.data.message) {
+                window.alert(err.data.message)
+            }
         }
     }
 
@@ -73,70 +84,78 @@ const DetailsBox = (playlistData) => {
                 style={{
                     maxHeight: '100%',
                     overflow: 'auto',
-                    margin: '23px 0px',
+                    marginTop: '23px',
+                    marginBottom: '55px',
                 }}
             >
                 {/* navbar */}
-                <div className="playlist-details-navbar">
-                    {/* image */}
-                    <img
-                        src={playlist?.images ? playlist?.images[0]?.url : ''}
-                        alt=""
-                        className="playlist-details-img-box"
-                    />
-
-                    {/* details */}
-                    <div className="playlist-details-info">
-                        {/* name */}
-                        <div
-                            className={
-                                playlist?.name?.length > 14
-                                    ? 'playlist-name-long'
-                                    : 'playlist-name'
+                {(playlist?.type === 'playlist' ||
+                    playlist?.type === 'album') && (
+                    <div className="playlist-details-navbar">
+                        {/* image */}
+                        <img
+                            src={
+                                playlist?.images ? playlist?.images[0]?.url : ''
                             }
-                        >
-                            {playlist?.name}
+                            alt=""
+                            className="playlist-details-img-box"
+                        />
+
+                        {/* details */}
+                        <div className="playlist-details-info">
+                            {/* name */}
+                            <div
+                                className={
+                                    playlist?.name?.length > 26
+                                        ? 'playlist-name-real-long'
+                                        : playlist?.name?.length > 14
+                                        ? 'playlist-name-long'
+                                        : 'playlist-name'
+                                }
+                            >
+                                {playlist?.name}
+                            </div>
+
+                            {/* description */}
+                            {playlist?.description && (
+                                <div className="playlist-description">
+                                    {parse(`${playlist?.description}`)}
+                                </div>
+                            )}
+
+                            {/* author, songs amount, followers amount */}
+                            {/* owner if it's playlist */}
+                            {playlist?.owner && (
+                                <div className="playlist-author">
+                                    <p
+                                        onClick={() => {
+                                            navTo(playlist?.owner?.id)
+                                        }}
+                                        style={{
+                                            margin: '0px',
+                                            marginRight: '4px',
+                                        }}
+                                    >
+                                        {playlist?.owner.display_name}
+                                    </p>
+                                    {` - ${playlist?.tracks?.items?.length} songs`}
+                                    {playlist?.followers?.total > 0
+                                        ? ` - ${playlist?.followers?.total} likes`
+                                        : ``}
+                                </div>
+                            )}
+
+                            {/* artist / artists if it's album */}
+                            {playlist?.artists && (
+                                <div className="playlist-author">
+                                    {playlist?.artists?.map((artist) => (
+                                        <p key={artist.name}>{artist.name}</p>
+                                    ))}
+                                </div>
+                            )}
                         </div>
-
-                        {/* description */}
-                        {playlist?.description && (
-                            <div className="playlist-description">
-                                {parse(`${playlist?.description}`)}
-                            </div>
-                        )}
-
-                        {/* author, songs amount, followers amount */}
-                        {/* owner if it's playlist */}
-                        {playlist?.owner && (
-                            <div className="playlist-author">
-                                <p
-                                    onClick={() => {
-                                        navTo(playlist?.owner?.id)
-                                    }}
-                                    style={{
-                                        margin: '0px',
-                                        marginRight: '4px',
-                                    }}
-                                >
-                                    {playlist?.owner.display_name}
-                                </p>
-                                {` - ${playlist?.tracks?.items?.length} songs`}
-                                {playlist?.followers?.total > 0
-                                    ? ` - ${playlist?.followers?.total} likes`
-                                    : ``}
-                            </div>
-                        )}
-
-                        {/* artist / artists if it's album */}
-                        {playlist?.artists && (
-                            <div className="playlist-author">
-                                {playlist?.artists?.map((artist) => (
-                                    <p key={artist.name}>{artist.name}</p>
-                                ))}
-                            </div>
-                        )}
                     </div>
-                </div>
+                )}
 
                 {/* playlists songs */}
                 <div className="table-box">
@@ -172,19 +191,15 @@ const DetailsBox = (playlistData) => {
                                         <>
                                             <h1>{item?.track?.name}</h1>
 
-                                            <div className="title-artists-box">
-                                                {item?.track?.artists.map(
-                                                    (artist) => {
-                                                        return (
-                                                            <h4
-                                                                key={
-                                                                    artist?.name
-                                                                }
-                                                            >
-                                                                {artist?.name}
-                                                            </h4>
-                                                        )
-                                                    }
+                                            <div className="album-artists-box">
+                                                {item?.track?.artists?.map(
+                                                    (artist, index) => (
+                                                        <h4 key={index}>
+                                                            {index > 0
+                                                                ? `, ${artist?.name}`
+                                                                : artist?.name}
+                                                        </h4>
+                                                    )
                                                 )}
                                             </div>
                                         </>
@@ -195,14 +210,16 @@ const DetailsBox = (playlistData) => {
                                         <>
                                             <h1>{item?.name}</h1>
 
-                                            <div className="title-artists-box">
-                                                {item?.artists.map((artist) => {
-                                                    return (
-                                                        <h4 key={artist?.name}>
-                                                            {artist?.name}
+                                            <div className="album-artists-box">
+                                                {item?.artists?.map(
+                                                    (artist, index) => (
+                                                        <h4 key={index}>
+                                                            {index > 0
+                                                                ? `, ${artist?.name}`
+                                                                : artist?.name}
                                                         </h4>
                                                     )
-                                                })}
+                                                )}
                                             </div>
                                         </>
                                     )}

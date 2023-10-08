@@ -1,4 +1,27 @@
+import { useCallback, useEffect, useState } from 'react'
+import { useGetSongsSavedMutation } from '../services/musicService'
+import { useSelector } from 'react-redux'
+
 const Leftbar = () => {
+    const { authInfo } = useSelector((state) => state.auth)
+    const [songsSaved] = useGetSongsSavedMutation()
+    const [savedSongs, setSavedSongs] = useState(null)
+
+    const getSongsSaved = useCallback(async () => {
+        try {
+            const res = await songsSaved(authInfo?.access_token).unwrap()
+            setSavedSongs(res)
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }, [songsSaved, authInfo, setSavedSongs])
+
+    useEffect(() => {
+        //callabck
+        getSongsSaved()
+    }, [getSongsSaved])
+
     return (
         <>
             <div className="bar-box leftbar">
@@ -22,6 +45,21 @@ const Leftbar = () => {
                 </div>
 
                 <h1>Your Library</h1>
+
+                {/* saved songs */}
+                <div className="leftbar-playlist-box">
+                    <div className="leftbar-playlist-img">
+                        <img src="" alt="" />
+                    </div>
+                    <div className="leftbar-playlist-info">
+                        <p>Liked Songs</p>
+                    </div>
+                </div>
+
+                {/* {savedSongs &&
+                    savedSongs?.items?.map((item) => (
+                        <div key={item?.track?.name}>{item?.track?.name}</div>
+                    ))} */}
             </div>
         </>
     )

@@ -34,10 +34,26 @@ export const musicApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
-        // songs
+        // songs youtube
         getSongId: builder.mutation({
             query: (query) => ({
                 url: `${MUSIC_URL}/youtube/${query}`,
+                method: 'GET',
+            }),
+        }),
+
+        // saved fav songs spotify
+        getSongsSaved: builder.mutation({
+            query: (query) => ({
+                url: `${MUSIC_URL}/songs/saved/${query}`,
+                method: 'GET',
+            }),
+        }),
+
+        // search songs / artists / albums / playlists
+        searchQuery: builder.mutation({
+            query: (data) => ({
+                url: `${MUSIC_URL}/search/${data.access_token}/${data.query}`,
                 method: 'GET',
             }),
         }),
@@ -50,4 +66,6 @@ export const {
     useGetAllAlbumsMutation,
     useGetAlbumIdMutation,
     useGetSongIdMutation,
+    useGetSongsSavedMutation,
+    useSearchQueryMutation,
 } = musicApiSlice

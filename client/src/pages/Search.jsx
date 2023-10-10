@@ -27,8 +27,6 @@ const Search = () => {
                     setAlbums(null)
                 )
 
-            console.log(query, 'searchin')
-
             const res = await getSearchQuery({
                 access_token: authInfo?.access_token,
                 query,
@@ -38,8 +36,6 @@ const Search = () => {
             setArtists(res?.artists?.items)
             setPlaylists(res?.playlists?.items)
             setAlbums(res?.albums?.items)
-
-            console.log(res)
         } catch (err) {
             console.log(err)
         }

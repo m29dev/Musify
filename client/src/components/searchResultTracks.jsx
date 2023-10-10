@@ -1,12 +1,53 @@
+import { useDispatch } from 'react-redux'
+import { useGetSongIdMutation } from '../services/musicService'
+import { setSongInfo } from '../redux/authSlice'
+
 const SearchResultTracks = (tracks) => {
+    const dispatch = useDispatch()
+
+    const [getSong] = useGetSongIdMutation()
+    const runPlayer = async (track, index) => {
+        try {
+            const songArtist = track?.artists?.[0]?.name
+            const songName = track?.name
+
+            const res = await getSong(`${songArtist} - ${songName}`).unwrap()
+
+            const songInfoObject = {
+                index,
+                spotify_playlist: {
+                    tracks: { items: tracks?.tracksData },
+                    type: `album`,
+                    name: `${songArtist} - Radio`,
+                    images: track?.album?.images,
+                },
+                spotify_song: track,
+                youtube_song: res,
+            }
+
+            console.log(songInfoObject)
+            dispatch(setSongInfo(songInfoObject))
+        } catch (err) {
+            console.log(err)
+            if (err.data.message) {
+                window.alert(err.data.message)
+            }
+        }
+    }
+
     return (
         <>
             <div className="search-results-tracks">
-                <h1>Songs</h1>
                 {tracks?.tracksData?.map(
                     (track, index) =>
                         index <= 4 && (
-                            <div key={index} className="table-item">
+                            <div
+                                key={index}
+                                className="table-item"
+                                onClick={() => {
+                                    runPlayer(track, index)
+                                }}
+                            >
                                 {/* image */}
                                 <img
                                     src={track?.album?.images?.[2]?.url}
@@ -17,24 +58,26 @@ const SearchResultTracks = (tracks) => {
                                 />
 
                                 {/* title */}
-                                <div className="column title">
+                                <div
+                                    className="column title"
+                                    style={{
+                                        width: '100%',
+                                        marginLeft: '12px',
+                                    }}
+                                >
                                     {track?.name && (
                                         <>
                                             <h1>{track?.name}</h1>
 
-                                            <div className="title-artists-box">
-                                                {track?.artists.map(
-                                                    (artist) => {
-                                                        return (
-                                                            <h4
-                                                                key={
-                                                                    artist?.name
-                                                                }
-                                                            >
-                                                                {artist?.name}
-                                                            </h4>
-                                                        )
-                                                    }
+                                            <div className="album-artists-box">
+                                                {track?.artists?.map(
+                                                    (artist, index) => (
+                                                        <h4 key={index}>
+                                                            {index > 0
+                                                                ? `, ${artist?.name}`
+                                                                : artist?.name}
+                                                        </h4>
+                                                    )
                                                 )}
                                             </div>
                                         </>

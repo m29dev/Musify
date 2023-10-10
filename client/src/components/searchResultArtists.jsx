@@ -1,14 +1,26 @@
 import { Card } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const SearchResultArtists = (artists) => {
+    const navigate = useNavigate()
+
+    const onArtistClick = (artistInfo) => {
+        navigate(`/artists/${artistInfo?.id}`)
+    }
+
     return (
         <>
-            <h1>Artists</h1>
             <div className="search-results-grid">
                 {artists?.artists?.map(
                     (artist, index) =>
                         index <= 4 && (
-                            <Card key={index} className="card-item">
+                            <Card
+                                key={index}
+                                className="card-item"
+                                onClick={() => {
+                                    onArtistClick(artist)
+                                }}
+                            >
                                 <Card.Img
                                     variant="top"
                                     src={artist?.images?.[2]?.url}
@@ -16,6 +28,9 @@ const SearchResultArtists = (artists) => {
                                 />
                                 <Card.Body>
                                     <Card.Title>{artist?.name}</Card.Title>
+                                    <h4 className="album-artists-box">
+                                        Artist
+                                    </h4>
                                 </Card.Body>
                             </Card>
                         )

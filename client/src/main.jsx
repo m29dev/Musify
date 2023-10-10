@@ -18,6 +18,8 @@ import Playlists from './pages/Playlists'
 import Albums from './pages/Albums'
 import AlbumDetails from './pages/AlbumDetails'
 import PlaylistDetails from './pages/PlaylistDetails'
+import Artists from './pages/Artists'
+import ArtistDetails from './pages/ArtistDetails'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +33,8 @@ const router = createBrowserRouter(
             <Route path="playlists/:id" element={<PlaylistDetails />}></Route>
             <Route path="albums" element={<Albums />}></Route>
             <Route path="albums/:id" element={<AlbumDetails />}></Route>
+            <Route path="artists" element={<Artists />}></Route>
+            <Route path="artists/:id" element={<ArtistDetails />}></Route>
 
             <Route path="*" element={<h1>404</h1>}></Route>
         </Route>

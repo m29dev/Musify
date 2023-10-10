@@ -1,11 +1,11 @@
 import Navbar from '../components/navbar'
-import ControlPanel from '../components/controlPanel'
-import { Card, Container, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useState } from 'react'
 import { useSearchQueryMutation } from '../services/musicService'
 import { useSelector } from 'react-redux'
 import SearchResultTracks from '../components/searchResultTracks'
 import SearchResultArtists from '../components/searchResultArtists'
+import SearchResultAlbums from '../components/searchResultAlbums'
 
 const Search = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -51,7 +51,11 @@ const Search = () => {
             <Navbar></Navbar>
 
             {/* search nav */}
-            <Form>
+            <Form
+                onSubmit={(e) => {
+                    e.preventDefault()
+                }}
+            >
                 <Form.Control
                     type="text"
                     placeholder="Search"
@@ -68,70 +72,44 @@ const Search = () => {
             <div className="search-results-box">
                 {/* Tracks results */}
                 {tracks && (
-                    <SearchResultTracks
-                        tracksData={tracks}
-                    ></SearchResultTracks>
+                    <>
+                        <h3 style={{ margin: '0px' }}>Songs</h3>
+                        <SearchResultTracks
+                            tracksData={tracks}
+                        ></SearchResultTracks>
+                    </>
                 )}
 
                 {/* Artists results */}
                 {artists && (
-                    <SearchResultArtists
-                        artists={artists}
-                    ></SearchResultArtists>
+                    <>
+                        <h3>Artists</h3>
+                        <SearchResultArtists
+                            artists={artists}
+                        ></SearchResultArtists>
+                    </>
                 )}
 
                 {/* Albums results */}
                 {albums && (
-                    <div className="search-results-albums">
-                        <h1>Albums</h1>
-
-                        <div className="search-results-grid">
-                            {albums?.map(
-                                (album, index) =>
-                                    index <= 4 && (
-                                        <Card key={index} className="card-item">
-                                            <Card.Img
-                                                variant="top"
-                                                src={album?.images?.[1]?.url}
-                                                className="card-img-box img-albums"
-                                            />
-                                            <Card.Body
-                                                style={{ paddingTop: '0px' }}
-                                            >
-                                                <Card.Title
-                                                    style={{ fontSize: '16px' }}
-                                                >
-                                                    {album?.name}
-                                                </Card.Title>
-
-                                                <div className="album-artists-box">
-                                                    {album?.artists?.map(
-                                                        (artist, index) => (
-                                                            <p key={index}>
-                                                                {index > 0
-                                                                    ? `, ${artist?.name}`
-                                                                    : artist?.name}
-                                                            </p>
-                                                        )
-                                                    )}
-                                                </div>
-                                            </Card.Body>
-                                        </Card>
-                                    )
-                            )}
-                        </div>
-                    </div>
+                    <>
+                        <h3>Albums</h3>
+                        <SearchResultAlbums
+                            albums={albums}
+                        ></SearchResultAlbums>
+                    </>
                 )}
 
                 {/* Playlists results */}
                 {playlists && (
-                    <div className="search-results-playlists">
-                        <h1>Playlists</h1>
-                    </div>
+                    <>
+                        <h3>Playlists</h3>
+                        <SearchResultAlbums
+                            albums={playlists}
+                        ></SearchResultAlbums>
+                    </>
                 )}
             </div>
-
-            <ControlPanel></ControlPanel>
         </div>
     )
 }

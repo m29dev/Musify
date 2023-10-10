@@ -132,6 +132,74 @@ const search_query_get = async (req, res) => {
     }
 }
 
+// GET
+// saved fav artists
+const artists_saved_get = async (req, res) => {
+    try {
+        console.log('artists_saved_get')
+
+        const { access_token } = req.params
+
+        const url = 'https://api.spotify.com/v1/me/following?type=artist'
+        const headers = {
+            Authorization: 'Bearer ' + access_token,
+        }
+
+        const artists = await fetch(url, { headers })
+        const data = await artists.json()
+
+        if (!data) return res.status(400).json({ message: 'err' })
+
+        res.status(200).json(data)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// GET
+// artists id
+const artists_id_get = async (req, res) => {
+    try {
+        const { access_token } = req.params
+        const { id } = req.body
+
+        // artist info
+        const url = `https://api.spotify.com/v1/artists/${id}`
+        const headers = {
+            Authorization: 'Bearer ' + access_token,
+        }
+        const artist = await fetch(url, { headers })
+        const data = await artist.json()
+        if (!data) return res.status(400).json({ message: 'err' })
+        console.log(data)
+
+        // artist albums
+        const urlAlbums = `https://api.spotify.com/v1/artists/${id}/albums`
+        const artistAlbums = await fetch(urlAlbums, { headers })
+        const dataAlbums = await artistAlbums.json()
+        if (!dataAlbums) return res.status(400).json({ message: 'err' })
+
+        // artist albums
+        const urlTracks = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=PL`
+        const artistTracks = await fetch(urlTracks, { headers })
+        const dataTracks = await artistTracks.json()
+        if (!dataTracks) return res.status(400).json({ message: 'err' })
+
+        const dataObject = {
+            id: data?.id,
+            name: data?.name,
+            images: data?.images,
+            type: data?.type,
+            albums: dataAlbums?.items,
+            tracks: dataTracks?.tracks,
+        }
+
+        res.status(200).json(dataObject)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     playlists_get,
     playlists_id_get,
@@ -139,4 +207,6 @@ module.exports = {
     albums_id_get,
     songs_saved_get,
     search_query_get,
+    artists_saved_get,
+    artists_id_get,
 }

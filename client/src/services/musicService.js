@@ -44,8 +44,8 @@ export const musicApiSlice = apiSlice.injectEndpoints({
 
         // saved fav songs spotify
         getSongsSaved: builder.mutation({
-            query: (query) => ({
-                url: `${MUSIC_URL}/songs/saved/${query}`,
+            query: (access_token) => ({
+                url: `${MUSIC_URL}/songs/saved/${access_token}`,
                 method: 'GET',
             }),
         }),
@@ -55,6 +55,21 @@ export const musicApiSlice = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: `${MUSIC_URL}/search/${data.access_token}/${data.query}`,
                 method: 'GET',
+            }),
+        }),
+
+        // artists saved
+        getArtistsSaved: builder.mutation({
+            query: (access_token) => ({
+                url: `${MUSIC_URL}/artists/saved/${access_token}`,
+                method: 'GET',
+            }),
+        }),
+        getArtistId: builder.mutation({
+            query: (data) => ({
+                url: `${MUSIC_URL}/artists/${data.authInfo.access_token}`,
+                method: 'POST',
+                body: { id: data.id },
             }),
         }),
     }),
@@ -68,4 +83,6 @@ export const {
     useGetSongIdMutation,
     useGetSongsSavedMutation,
     useSearchQueryMutation,
+    useGetArtistsSavedMutation,
+    useGetArtistIdMutation,
 } = musicApiSlice

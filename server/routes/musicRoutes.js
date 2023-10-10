@@ -20,4 +20,11 @@ router.get(
     controller.search_query_get
 )
 
+// artists
+router.get(
+    '/api/music/artists/saved/:access_token',
+    controller.artists_saved_get
+)
+router.post('/api/music/artists/:access_token', controller.artists_id_get)
+
 module.exports = router

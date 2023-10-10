@@ -1,26 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useGetSongsSavedMutation } from '../services/musicService'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 const Leftbar = () => {
-    const { authInfo } = useSelector((state) => state.auth)
-    const [songsSaved] = useGetSongsSavedMutation()
-    const [savedSongs, setSavedSongs] = useState(null)
-
-    const getSongsSaved = useCallback(async () => {
-        try {
-            const res = await songsSaved(authInfo?.access_token).unwrap()
-            setSavedSongs(res)
-            console.log(res)
-        } catch (err) {
-            console.log(err)
-        }
-    }, [songsSaved, authInfo, setSavedSongs])
+    const { songInfo } = useSelector((state) => state.auth)
+    const [playlistDropdown, setPlaylistDropdown] = useState(false)
+    const { fullScreenMode } = useSelector((state) => state.auth)
 
     useEffect(() => {
-        //callabck
-        getSongsSaved()
-    }, [getSongsSaved])
+        // on fullScreenMode update set playlistDropdown
+        setPlaylistDropdown(fullScreenMode)
+    }, [fullScreenMode, setPlaylistDropdown])
 
     return (
         <>
@@ -47,19 +37,105 @@ const Leftbar = () => {
                 <h1>Your Library</h1>
 
                 {/* saved songs */}
-                <div className="leftbar-playlist-box">
+                {/* <div className="leftbar-playlist-box">
                     <div className="leftbar-playlist-img">
                         <img src="" alt="" />
                     </div>
                     <div className="leftbar-playlist-info">
                         <p>Liked Songs</p>
                     </div>
+                </div> */}
+
+                {/* current playlist */}
+                <div
+                    className="leftbar-playlist-box"
+                    onClick={() => {
+                        setPlaylistDropdown(!playlistDropdown)
+                    }}
+                >
+                    <img
+                        src={
+                            songInfo?.spotify_playlist?.images?.[2]?.url ||
+                            songInfo?.spotify_playlist?.images?.[1]?.url ||
+                            songInfo?.spotify_playlist?.images?.[0]?.url
+                        }
+                        alt=""
+                        className="leftbar-playlist-img"
+                    />
+
+                    <div className="leftbar-playlist-info">
+                        {songInfo?.spotify_playlist?.name}
+                    </div>
+
+                    <div style={{ flexGrow: 1 }}></div>
+
+                    {playlistDropdown && <IoIosArrowDown></IoIosArrowDown>}
+                    {!playlistDropdown && <IoIosArrowUp></IoIosArrowUp>}
                 </div>
 
-                {/* {savedSongs &&
-                    savedSongs?.items?.map((item) => (
-                        <div key={item?.track?.name}>{item?.track?.name}</div>
-                    ))} */}
+                {/* current playlist songs dropdown */}
+                {playlistDropdown && (
+                    <div className="leftbar-table-box">
+                        {/* table items */}
+                        {songInfo?.spotify_playlist?.tracks?.items?.map(
+                            (item, index) => (
+                                <div
+                                    key={index}
+                                    className={
+                                        songInfo?.spotify_song?.id ===
+                                        (item?.id || item?.track?.id)
+                                            ? `table-item-active leftbar-table-item`
+                                            : `table-item leftbar-table-item`
+                                    }
+                                    onClick={() => {
+                                        // runPlayer(
+                                        //     songInfo?.spotify_playlist,
+                                        //     index
+                                        // )
+                                    }}
+                                >
+                                    <div className="column leftbar-title">
+                                        {item?.track && (
+                                            <>
+                                                <h1>{item?.track?.name}</h1>
+
+                                                <div className="album-artists-box">
+                                                    {item?.track?.artists?.map(
+                                                        (artist, index) => (
+                                                            <h4 key={index}>
+                                                                {index > 0
+                                                                    ? `, ${artist?.name}`
+                                                                    : artist?.name}
+                                                            </h4>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {item?.name && (
+                                            <>
+                                                <h1>{item?.name}</h1>
+
+                                                <div className="album-artists-box">
+                                                    {item?.artists?.map(
+                                                        (artist, index) => (
+                                                            <h4 key={index}>
+                                                                {index > 0
+                                                                    ? `, ${artist?.name}`
+                                                                    : artist?.name}
+                                                            </h4>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                        )}
+                    </div>
+                )}
             </div>
         </>
     )

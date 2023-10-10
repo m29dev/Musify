@@ -78,10 +78,12 @@ svg {
 }
 
 .bar-box {
-    /* flex-grow: 1; */
-    padding: 20px;
-    padding-top: 0px;
+    max-width: 458px;
     width: 100%;
+    height: 100%;
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* lefbar */
@@ -99,6 +101,8 @@ svg {
     height: 64px;
     padding: 8px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -117,8 +121,49 @@ svg {
     justify-content: center;
     margin-left: 12px;
 }
+/* leftbar table */
+.leftbar-table-box {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    max-height: 100%;
+    margin-bottom: 55px;
+    overflow: auto;
+}
+.leftbar-table-item {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 16px;
+}
+.leftbar-title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.leftbar-title h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.leftbar-title h4 {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0px;
+    /* text-overflow: ellipsis; */
+    white-space: nowrap;
+    overflow: hidden;
+}
 
 /* rightbar */
+.rightbar {
+    max-width: 458px;
+}
 .rightbar h1 {
     font-size: 27px;
     font-weight: bold;
@@ -145,10 +190,44 @@ svg {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.rightbar-artists-box {
+    width: 100%;
+    max-height: 35px;
+    display: flex;
+    text-wrap: nowrap;
+    font-size: 30px;
+    overflow: hidden;
+}
+
+/* slider */
+.slider-marquee {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    height: 200px;
+    overflow-x: hidden;
+}
+.slider-track {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    animation: slider-movement 10s linear infinite;
+}
+.slider-track:hover {
+    animation-play-state: paused;
+}
+@keyframes slider-movement {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
 
 .center-box {
     min-width: 1000px;
-    width: 1000px;
+    width: 100%;
     height: 100%;
     padding: 23px;
     border-radius: 18px;
@@ -160,7 +239,6 @@ svg {
     );
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     /* overflow: auto; */
 }
 /* .navbar-box-playlist {
@@ -194,10 +272,11 @@ svg {
     cursor: pointer;
 }
 .card-item {
-    background-color: rgb(37, 37, 37);
+    background-color: rgb(31, 31, 31);
     color: white;
     border: 0px;
     height: 100%;
+    cursor: pointer;
     transition: 0.5s;
 }
 .card-item:hover {
@@ -221,7 +300,6 @@ svg {
 }
 .card-img-box {
     padding: 16px;
-    padding-bottom: 0px;
     border-radius: 20px;
 }
 
@@ -293,8 +371,20 @@ svg {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
     padding: 0px 16px;
 }
+.table-item-active {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 16px;
+    color: rgb(50, 177, 255);
+}
+
 .index {
     width: 16px;
     text-align: end;
@@ -306,7 +396,15 @@ svg {
     flex-direction: column;
 }
 .title-artists-box {
+    width: 100%;
     display: flex;
+    flex-direction: row;
+}
+.artist-link {
+    cursor: pointer;
+}
+.artist-link:hover {
+    text-decoration: underline;
 }
 .title h1 {
     font-size: 16px;
@@ -320,12 +418,11 @@ svg {
     font-size: 14px;
     color: #b3b3b3;
     margin: 0px;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
 }
 .album {
     width: 40%;
+    color: white !important;
 }
 .time {
     width: 50px;
@@ -355,6 +452,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-self: start;
+    overflow: hidden;
 }
 .control-panel-btn-box {
     width: 20%;
@@ -384,10 +482,7 @@ h1 {
     font-size: 14px;
     color: #b3b3b3;
     margin: 0px;
-    margin-right: 4px;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
 }
 .control-panel-btn {
     width: 30px;
@@ -472,6 +567,7 @@ svg.control-panel-btn {
     border: solid 2px #232323;
     border-radius: 18px;
     color: white;
+    width: 430px;
 }
 .form-control:hover {
     border-color: #383838 !important;
@@ -492,8 +588,13 @@ svg.control-panel-btn {
 /* SEARCH RESULTS */
 .search-results-box {
     height: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     overflow: auto;
+    padding-right: 23px;
+    margin-top: 30px;
+}
+.search-results-box h3 {
+    margin-top: 30px;
 }
 .search-results-grid {
     display: grid;
@@ -509,10 +610,34 @@ svg.control-panel-btn {
 .img-albums {
     width: 100%;
     aspect-ratio: 1 / 1;
-    padding: 16px;
 }
 .album-artists-box {
     display: flex;
     width: 100%;
     overflow: hidden;
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0px;
+}
+.title-h5-l {
+    height: 30px;
+}
+.title-h5-s {
+    height: 20px;
+}
+div.card-title.h5 {
+    font-size: 16px;
+    height: 20px;
+    margin-bottom: 4px;
+}
+div.card-body {
+    padding-top: 0px;
+}
+div.card {
+    min-height: 245px;
+}
+
+/* active song */
+.avtive-song {
+    color: #15ff5b !important;
 }

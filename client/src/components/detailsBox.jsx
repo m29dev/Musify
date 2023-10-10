@@ -3,10 +3,11 @@ import parse from 'html-react-parser'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGetSongIdMutation } from '../services/musicService'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setSongInfo } from '../redux/authSlice'
 
 const DetailsBox = (playlistData) => {
+    const { songInfo } = useSelector((state) => state.auth)
     const playlist = playlistData.playlist
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -84,7 +85,6 @@ const DetailsBox = (playlistData) => {
                 style={{
                     maxHeight: '100%',
                     overflow: 'auto',
-                    marginTop: '23px',
                     marginBottom: '55px',
                 }}
             >
@@ -149,7 +149,17 @@ const DetailsBox = (playlistData) => {
                             {playlist?.artists && (
                                 <div className="playlist-author">
                                     {playlist?.artists?.map((artist) => (
-                                        <p key={artist.name}>{artist.name}</p>
+                                        <p
+                                            key={artist?.name}
+                                            onClick={() => {
+                                                navigate(
+                                                    `/artists/${artist?.id}`
+                                                )
+                                            }}
+                                            className="artist-link"
+                                        >
+                                            {artist?.name}
+                                        </p>
                                     ))}
                                 </div>
                             )}
@@ -176,7 +186,12 @@ const DetailsBox = (playlistData) => {
                         return (
                             <div
                                 key={index}
-                                className="table-item"
+                                className={
+                                    songInfo?.spotify_song?.id ===
+                                    (item?.id || item?.track?.id)
+                                        ? `table-item-active`
+                                        : `table-item`
+                                }
                                 onClick={() => {
                                     runPlayer(playlist, index)
                                 }}

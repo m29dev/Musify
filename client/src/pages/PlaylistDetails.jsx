@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import DetailsBox from '../components/detailsBox'
-import ControlPanel from '../components/controlPanel'
 
 const PlaylistDetails = () => {
     const [playlistId] = useGetPlaylistIdMutation()
@@ -33,7 +32,6 @@ const PlaylistDetails = () => {
             {/* navbar main */}
             <Navbar></Navbar>
             {playlist && <DetailsBox playlist={playlist}></DetailsBox>}
-            <ControlPanel></ControlPanel>
         </div>
     )
 }

@@ -1,5 +1,4 @@
 import Navbar from '../components/navbar'
-import ControlPanel from '../components/controlPanel'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFullScreenMode } from '../redux/authSlice'
@@ -31,9 +30,6 @@ const Home = () => {
         >
             {/* navbar main */}
             <Navbar></Navbar>
-
-            {/* control panel bar */}
-            <ControlPanel></ControlPanel>
         </div>
     )
 }

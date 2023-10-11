@@ -10,7 +10,6 @@ const YoutubePlayer = () => {
         controlPanelInfo,
         onChangeDuration,
         fullScreenMode,
-        hideLeftbar,
         hideRightbar,
     } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
@@ -83,27 +82,17 @@ const YoutubePlayer = () => {
     const [classVar, setClassVar] = useState('flr')
 
     useEffect(() => {
-        console.log(
-            'FS: ',
-            fullScreenMode,
-            'LB: ',
-            hideLeftbar,
-            'RB: ',
-            hideRightbar
-        )
+        if (fullScreenMode) setClassVar('player-home-page')
+        if (!fullScreenMode && !hideRightbar) setClassVar('player-rightbar')
+        if (!fullScreenMode && hideRightbar) setClassVar('player-hidden')
 
-        if (fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('flr')
-        if (fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('f_r')
-        if (fullScreenMode && !hideLeftbar && hideRightbar) setClassVar('fl_')
-        if (fullScreenMode && hideLeftbar && hideRightbar) setClassVar('f__')
-
-        if (!fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('_lr')
-        if (!fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('__r')
-        if (!fullScreenMode && !hideLeftbar && hideRightbar)
-            setClassVar('player-hidden')
-        if (!fullScreenMode && hideLeftbar && hideRightbar)
-            setClassVar('player-hidden')
-    }, [fullScreenMode, hideLeftbar, hideRightbar])
+        // if (!fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('_lr')
+        // if (!fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('__r')
+        // if (!fullScreenMode && !hideLeftbar && hideRightbar)
+        //     setClassVar('player-hidden')
+        // if (!fullScreenMode && hideLeftbar && hideRightbar)
+        //     setClassVar('player-hidden')
+    }, [fullScreenMode, hideRightbar])
 
     return (
         <>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useGetAllPlaylistsMutation } from '../services/musicService'
 import { useSelector } from 'react-redux'
 import CardComponent from '../components/card'
@@ -24,9 +24,16 @@ const Playlists = () => {
         getAllPlaylists()
     }, [getAllPlaylists])
 
+    const centerBoxRef = useRef()
+
+    useEffect(() => {
+        // on center-box width change
+        console.log('width: ', centerBoxRef?.current?.offsetWidth)
+    }, [centerBoxRef])
+
     return (
         <>
-            <div className="center-box">
+            <div ref={centerBoxRef} className="center-box">
                 {/* navbar main */}
                 <Navbar></Navbar>
 

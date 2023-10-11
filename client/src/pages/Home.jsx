@@ -21,7 +21,7 @@ const Home = () => {
     }, [dispatch])
 
     return (
-        <div className="center-box">
+        <div className="center-box test-home-page">
             {/* navbar main */}
             <Navbar></Navbar>
 

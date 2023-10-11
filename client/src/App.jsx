@@ -10,12 +10,13 @@ const App = () => {
         <>
             <div className="main-box">
                 <Leftbar />
-                <Outlet />
+                <div className="test-home-box">
+                    <Outlet />
+                    {/* youtube player */}
+                    <YoutubePlayer></YoutubePlayer>
+                </div>
                 <Rightbar />
             </div>
-
-            {/* youtube player */}
-            <YoutubePlayer></YoutubePlayer>
 
             {/* control panel bar */}
             <ControlPanel></ControlPanel>

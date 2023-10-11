@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BsGithub } from 'react-icons/bs'
 import {
     TbLayoutSidebarRightCollapseFilled,
@@ -14,23 +14,43 @@ const Rightbar = () => {
     const dispatch = useDispatch()
 
     const artistsBoxRef = useRef(null)
+    const titleBoxRef = useRef(null)
+
+    const [sliderTitle, setSliderTitle] = useState(false)
+    const [sldierArtists, setSliderArtists] = useState(false)
 
     useEffect(() => {
-        const attach = document.querySelector('.slider-attach')
-        attach.classList.remove('slider-track')
+        // title slider toggle
+        //const attachTitle = document.querySelector('.title-slider-attach')
+        const getTitle = document.querySelector('.get-title')
+        if (+getTitle?.offsetWidth >= +titleBoxRef?.current?.offsetWidth) {
+            // attachTitle?.classList?.add('slider-track')
+            setSliderTitle(true)
+            console.log('title TRUE SLIDER')
+        } else {
+            // attachTitle?.classList?.remove('slider-track')
+            setSliderTitle(false)
+            console.log('title FALSE')
+        }
 
+        // aritsts slider toggle
+        //const attachArtists = document.querySelector('.artists-slider-attach')
         const artists = document.querySelectorAll('.rightbar-artists')
         let artistsAllWidth = 0
-        artists.forEach((artist) => {
-            artistsAllWidth += artist.offsetWidth
+        artists?.forEach((artist) => {
+            artistsAllWidth += artist?.offsetWidth
         })
-
-        const artistsBoxWidth = artistsBoxRef.current.offsetWidth
-
-        if (artistsAllWidth >= artistsBoxWidth) {
-            attach.classList.add('slider-track')
+        const artistsBoxWidth = artistsBoxRef?.current?.offsetWidth
+        if (+artistsAllWidth >= +artistsBoxWidth) {
+            // attachArtists?.classList?.add('slider-track')
+            setSliderArtists(true)
+            console.log('artists TRUE SLIDER')
+        } else {
+            // attachArtists?.classList?.remove('slider-track')
+            setSliderArtists(false)
+            console.log('artists FALSE')
         }
-    }, [songInfo])
+    }, [songInfo, setSliderTitle, setSliderArtists])
 
     return (
         <>
@@ -66,16 +86,6 @@ const Rightbar = () => {
                 {/* YouTube player box */}
                 {!hideRightbar && (
                     <>
-                        {/* <div
-                            className={
-                                fullScreenMode
-                                    ? 'rightbar-img-box-absolute'
-                                    : 'rightbar-img-box'
-                            }
-                        >
-                            <YoutubePlayer></YoutubePlayer>
-                        </div> */}
-
                         {
                             <div
                                 className="rightbar-img-box"
@@ -112,11 +122,36 @@ const Rightbar = () => {
                             </div>
                         }
 
-                        <h1>{songInfo?.spotify_song?.name}</h1>
+                        {/* title slider */}
+                        {/* <div
+                            ref={titleBoxRef}
+                            className="slider-marquee"
+                        >
+                            <div className="title-slider-attach slider-track">
+                                <a className="get-title">
+                                    {songInfo?.spotify_song?.name}
+                                </a>
+                            </div>
+                        </div> */}
+
+                        {/* title slider */}
+                        <div
+                            ref={titleBoxRef}
+                            className="slider-marquee"
+                            style={{ height: '35px' }}
+                        >
+                            <div className={sliderTitle ? 'slider-track' : ''}>
+                                <div className="get-title">
+                                    <h1>{songInfo?.spotify_song?.name}</h1>
+                                </div>
+                            </div>
+                        </div>
 
                         {/* artists slider */}
                         <div ref={artistsBoxRef} className="slider-marquee">
-                            <div className="slider-attach">
+                            <div
+                                className={sldierArtists ? 'slider-track' : ''}
+                            >
                                 {songInfo?.spotify_song?.artists?.map(
                                     (artist, index) => (
                                         <a

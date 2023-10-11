@@ -6,6 +6,7 @@ import {
     createRoutesFromElements,
     RouterProvider,
     Route,
+    Navigate,
 } from 'react-router-dom'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
@@ -20,11 +21,15 @@ import AlbumDetails from './pages/AlbumDetails'
 import PlaylistDetails from './pages/PlaylistDetails'
 import Artists from './pages/Artists'
 import ArtistDetails from './pages/ArtistDetails'
+import ErrorPage from './pages/ErrorPage'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
-            {/* <Route path='/' element={<Navigate to="/home" replace={true} />}></Route> */}
+            <Route
+                path="/"
+                element={<Navigate to="/home" replace={true} />}
+            ></Route>
 
             <Route path="auth" element={<Auth />}></Route>
             <Route path="home" element={<Home />}></Route>
@@ -36,7 +41,7 @@ const router = createBrowserRouter(
             <Route path="artists" element={<Artists />}></Route>
             <Route path="artists/:id" element={<ArtistDetails />}></Route>
 
-            <Route path="*" element={<h1>404</h1>}></Route>
+            <Route path="*" element={<ErrorPage />}></Route>
         </Route>
     )
 )

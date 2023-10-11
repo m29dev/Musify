@@ -1,9 +1,10 @@
 import Navbar from '../components/navbar'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setFullScreenMode } from '../redux/authSlice'
 
 const Home = () => {
+    const { authInfo } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
 
     // on HomePage init set fullScreen mode to true
@@ -20,16 +21,22 @@ const Home = () => {
     }, [dispatch])
 
     return (
-        <div
-            className="center-box"
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-            }}
-        >
+        <div className="center-box">
             {/* navbar main */}
             <Navbar></Navbar>
+
+            {!authInfo && (
+                <div style={{ padding: '23px', textAlign: 'center' }}>
+                    <h1>Musify is the place for a real music enthusiasts.</h1>
+                    <h5>
+                        listen to your favorites tracks, artists, playlists,
+                        alubums,
+                    </h5>
+                    <h5>
+                        whatever You want, all with an Official Music Video.
+                    </h5>
+                </div>
+            )}
         </div>
     )
 }

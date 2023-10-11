@@ -6,6 +6,8 @@ import { useGetAccountMutation } from '../services/accountService'
 import {
     clearAccountInfo,
     clearAuthInfo,
+    clearControlPanelInfo,
+    clearSongInfo,
     setAccountInfo,
     updateAuthInfoToken,
 } from '../redux/authSlice'
@@ -17,6 +19,7 @@ import {
 import { BiHomeAlt2, BiSolidPlaylist } from 'react-icons/bi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { LuAlbum } from 'react-icons/lu'
+import { ImSpotify } from 'react-icons/im'
 
 const Navbar = () => {
     const [authMode, setAuthMode] = useState(false)
@@ -41,6 +44,8 @@ const Navbar = () => {
         // clear local storage info
         dispatch(clearAuthInfo())
         dispatch(clearAccountInfo())
+        dispatch(clearControlPanelInfo())
+        dispatch(clearSongInfo())
     }
 
     // refresh token
@@ -142,10 +147,11 @@ const Navbar = () => {
                     </div>
 
                     {/* nav account */}
-                    <Dropdown style={{ padding: '0px' }}>
+                    <Dropdown data-bs-theme="dark">
                         <Dropdown.Toggle
                             variant="none"
                             className="img-dropdown"
+                            style={{ padding: '0px', margin: '0px' }}
                         >
                             <Image
                                 src={
@@ -159,13 +165,6 @@ const Navbar = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    navTo(`account/${accountInfo.id}`)
-                                }}
-                            >
-                                Account Settings
-                            </Dropdown.Item>
                             <Dropdown.Item onClick={signOut}>
                                 Sign Out
                             </Dropdown.Item>
@@ -177,7 +176,7 @@ const Navbar = () => {
             {authMode && (
                 <div className="navbar-box">
                     <a href="http://localhost:3000/api/auth/signin">
-                        Authorize
+                        Sign In via Spotify <ImSpotify></ImSpotify>
                     </a>
                 </div>
             )}

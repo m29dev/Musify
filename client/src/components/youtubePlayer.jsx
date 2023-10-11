@@ -2,12 +2,17 @@ import ReactPlayer from 'react-player'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDurationVideo, setSongInfo } from '../redux/authSlice'
 import { useGetSongIdMutation } from '../services/musicService'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const YoutubePlayer = () => {
-    const { songInfo } = useSelector((state) => state.auth)
-    const { controlPanelInfo } = useSelector((state) => state.auth)
-    const { onChangeDuration } = useSelector((state) => state.auth)
+    const {
+        songInfo,
+        controlPanelInfo,
+        onChangeDuration,
+        fullScreenMode,
+        hideLeftbar,
+        hideRightbar,
+    } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const [getSong] = useGetSongIdMutation()
 
@@ -64,21 +69,59 @@ const YoutubePlayer = () => {
         videoPlayerRef.current.seekTo(onChangeDuration?.durationVideo)
     }, [onChangeDuration])
 
+    // options
+    // fullScreen LB RB             => flr  w1000, center
+    // fullScreen HiddenLB RB       => f_r  w1500, leftCenter
+    // fullScreen LB HiddenRB       => fl_  w1500, rightCenter
+    // fullScreen HiddenLB HiddenRB => f__  w2000, center
+
+    // HiddenFS LB RB               => _lr  w450, right
+    // HiddenFS HiddenLB RB         => __r  w450, right
+    // HiddenFS LB HiddenRB         => _l_  hidden
+    // HiddenFS HiddenLB HiddenRB   => ___  hidden
+
+    const [classVar, setClassVar] = useState('flr')
+
+    useEffect(() => {
+        console.log(
+            'FS: ',
+            fullScreenMode,
+            'LB: ',
+            hideLeftbar,
+            'RB: ',
+            hideRightbar
+        )
+
+        if (fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('flr')
+        if (fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('f_r')
+        if (fullScreenMode && !hideLeftbar && hideRightbar) setClassVar('fl_')
+        if (fullScreenMode && hideLeftbar && hideRightbar) setClassVar('f__')
+
+        if (!fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('_lr')
+        if (!fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('__r')
+        if (!fullScreenMode && !hideLeftbar && hideRightbar)
+            setClassVar('player-hidden')
+        if (!fullScreenMode && hideLeftbar && hideRightbar)
+            setClassVar('player-hidden')
+    }, [fullScreenMode, hideLeftbar, hideRightbar])
+
     return (
         <>
             {/* YOUTUBE PLAYER */}
-            <ReactPlayer
-                ref={videoPlayerRef}
-                url={`https://www.youtube.com/embed/${songInfo?.youtube_song?.id?.videoId}`}
-                playing={controlPanelInfo?.playVideo}
-                volume={controlPanelInfo?.volumeVideo}
-                onProgress={durationProgress}
-                onEnded={() => {
-                    nextSong()
-                }}
-                width={`100%`}
-                height={`100%`}
-            ></ReactPlayer>
+            <div className={classVar}>
+                <ReactPlayer
+                    ref={videoPlayerRef}
+                    url={`https://www.youtube.com/embed/${songInfo?.youtube_song?.id?.videoId}`}
+                    playing={controlPanelInfo?.playVideo}
+                    volume={controlPanelInfo?.volumeVideo}
+                    onProgress={durationProgress}
+                    onEnded={() => {
+                        nextSong()
+                    }}
+                    width={`100%`}
+                    height={`100%`}
+                ></ReactPlayer>
+            </div>
         </>
     )
 }

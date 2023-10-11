@@ -27,6 +27,8 @@ const initialState = {
     },
 
     fullScreenMode: false,
+    hideLeftbar: false,
+    hideRightbar: false,
 }
 
 export const authSlice = createSlice({
@@ -62,6 +64,10 @@ export const authSlice = createSlice({
             state.songInfo = action.payload
             localStorage.setItem('songInfo', JSON.stringify(action.payload))
         },
+        clearSongInfo: (state) => {
+            state.songInfo = null
+            localStorage.removeItem('songInfo')
+        },
 
         // control panel
         setPlayVideo: (state, action) => {
@@ -76,10 +82,21 @@ export const authSlice = createSlice({
         setOnChangeDuration: (state, action) => {
             state.onChangeDuration.durationVideo = action.payload
         },
+        clearControlPanelInfo: (state) => {
+            state.controlPanelInfo = null
+        },
 
         // fullscreen
         setFullScreenMode: (state, action) => {
             state.fullScreenMode = action.payload
+        },
+
+        // sidebars
+        setHideLeftbar: (state, action) => {
+            state.hideLeftbar = action.payload
+        },
+        setHideRightbar: (state, action) => {
+            state.hideRightbar = action.payload
         },
     },
 })
@@ -91,10 +108,14 @@ export const {
     setAccountInfo,
     clearAccountInfo,
     setSongInfo,
+    clearSongInfo,
     setPlayVideo,
     setDurationVideo,
     setVolumeVideo,
     setOnChangeDuration,
+    clearControlPanelInfo,
     setFullScreenMode,
+    setHideLeftbar,
+    setHideRightbar,
 } = authSlice.actions
 export default authSlice.reducer

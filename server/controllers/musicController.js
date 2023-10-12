@@ -210,12 +210,9 @@ const user_top_song_get = async (req, res) => {
         }
         const artist = await fetch(url, { headers })
         const data = await artist.json()
-        console.log(data)
 
-        res.status(200).json({ message: 'top_song_api', data })
-        // if (!data) return res.status(400).json({ message: 'err' })
-
-        // res.status(200).json(dataObject)
+        if (!data) return res.status(400).json({ message: 'err' })
+        res.status(200).json(data)
     } catch (err) {
         console.log(err)
     }

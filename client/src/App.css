@@ -902,9 +902,6 @@ leftbar div.card {
         height: auto;
         aspect-ratio: 1 / 1;
     }
-    .center-box {
-        /* overflow: auto; */
-    }
     .search-results-box {
         overflow: visible;
     }

@@ -46,8 +46,6 @@ const YoutubePlayer = () => {
                 youtube_song: res,
             }
 
-            console.log(songInfoObject)
-
             dispatch(setSongInfo(songInfoObject))
         } catch (err) {
             console.log(err)
@@ -67,17 +65,6 @@ const YoutubePlayer = () => {
     useEffect(() => {
         videoPlayerRef.current.seekTo(onChangeDuration?.durationVideo)
     }, [onChangeDuration])
-
-    // options
-    // fullScreen LB RB             => flr  w1000, center
-    // fullScreen HiddenLB RB       => f_r  w1500, leftCenter
-    // fullScreen LB HiddenRB       => fl_  w1500, rightCenter
-    // fullScreen HiddenLB HiddenRB => f__  w2000, center
-
-    // HiddenFS LB RB               => _lr  w450, right
-    // HiddenFS HiddenLB RB         => __r  w450, right
-    // HiddenFS LB HiddenRB         => _l_  hidden
-    // HiddenFS HiddenLB HiddenRB   => ___  hidden
 
     const [classVar, setClassVar] = useState('flr')
 

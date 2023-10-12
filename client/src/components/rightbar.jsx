@@ -21,13 +21,10 @@ const Rightbar = () => {
     useEffect(() => {
         // title slider toggle
         const getTitle = document.querySelector('.get-title')
-        console.log(getTitle?.innerHTML?.length)
         if (getTitle?.innerHTML?.length >= 23) {
             setSliderTitle(true)
-            console.log('title TRUE SLIDER')
         } else {
             setSliderTitle(false)
-            console.log('title FALSE')
         }
 
         // aritsts slider toggle
@@ -38,10 +35,8 @@ const Rightbar = () => {
         })
         if (+artistsAllWidth >= 400) {
             setSliderArtists(true)
-            console.log('artists TRUE SLIDER')
         } else {
             setSliderArtists(false)
-            console.log('artists FALSE')
         }
     }, [songInfo, setSliderTitle, setSliderArtists])
 

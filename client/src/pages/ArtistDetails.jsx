@@ -17,7 +17,6 @@ const ArtistDetails = () => {
         try {
             const id = params.id
             const res = await aristId({ authInfo, id }).unwrap()
-            console.log(res)
             setArtist(res)
         } catch (err) {
             console.log(err)

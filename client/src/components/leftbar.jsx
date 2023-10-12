@@ -33,7 +33,6 @@ const Leftbar = () => {
                     spotify_song: song,
                     youtube_song: res,
                 }
-                console.log(songInfoObject)
                 dispatch(setSongInfo(songInfoObject))
             }
 
@@ -52,7 +51,6 @@ const Leftbar = () => {
                     spotify_song: song,
                     youtube_song: res,
                 }
-                console.log(songInfoObject)
                 dispatch(setSongInfo(songInfoObject))
             }
         } catch (err) {

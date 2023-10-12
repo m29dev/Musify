@@ -24,8 +24,6 @@ const SearchResultTracks = (tracks) => {
                 spotify_song: track,
                 youtube_song: res,
             }
-
-            console.log(songInfoObject)
             dispatch(setSongInfo(songInfoObject))
         } catch (err) {
             console.log(err)

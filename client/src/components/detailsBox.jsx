@@ -45,7 +45,6 @@ const DetailsBox = (playlistData) => {
                     spotify_song: song,
                     youtube_song: res,
                 }
-                console.log(songInfoObject)
                 dispatch(setSongInfo(songInfoObject))
             }
 
@@ -64,7 +63,6 @@ const DetailsBox = (playlistData) => {
                     spotify_song: song,
                     youtube_song: res,
                 }
-                console.log(songInfoObject)
                 dispatch(setSongInfo(songInfoObject))
             }
         } catch (err) {

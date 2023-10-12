@@ -15,7 +15,6 @@ const Playlists = () => {
     const getAllPlaylists = useCallback(async () => {
         try {
             const res = await allPlaylists(authInfo).unwrap()
-            console.log(res)
             setPlaylists(res.items)
         } catch (err) {
             console.log(err)

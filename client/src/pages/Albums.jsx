@@ -16,7 +16,6 @@ const Albums = () => {
         try {
             const res = await getAlbums(authInfo).unwrap()
             setAlbums(res)
-            console.log(res)
         } catch (err) {
             console.log(err)
         }

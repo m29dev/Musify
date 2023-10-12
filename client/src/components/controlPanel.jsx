@@ -65,9 +65,6 @@ const ControlPanel = () => {
                 spotify_song: song,
                 youtube_song: res,
             }
-
-            console.log(songInfoObject)
-
             dispatch(setSongInfo(songInfoObject))
             dispatch(setDurationVideo(0))
         } catch (err) {

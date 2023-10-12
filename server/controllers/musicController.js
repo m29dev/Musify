@@ -212,7 +212,7 @@ const user_top_song_get = async (req, res) => {
         const data = await artist.json()
 
         if (!data) return res.status(400).json({ message: 'err' })
-        res.status(200).json(dataObject)
+        res.status(200).json(data)
     } catch (err) {
         console.log(err)
     }

@@ -202,7 +202,6 @@ const artists_id_get = async (req, res) => {
 const user_top_song_get = async (req, res) => {
     try {
         const { access_token } = req.params
-        const { id } = req.body
 
         // artist info
         const url = `https://api.spotify.com/v1/me/top/artists`
@@ -213,6 +212,7 @@ const user_top_song_get = async (req, res) => {
         const data = await artist.json()
         console.log(data)
 
+        res.status(200).json({ message: 'top_song_api', data })
         // if (!data) return res.status(400).json({ message: 'err' })
 
         // res.status(200).json(dataObject)

@@ -903,7 +903,7 @@ leftbar div.card {
         aspect-ratio: 1 / 1;
     }
     .center-box {
-        overflow: auto;
+        /* overflow: auto; */
     }
     .search-results-box {
         overflow: visible;
@@ -931,6 +931,9 @@ leftbar div.card {
     .table-box {
         margin-top: 23px;
     }
+    .table-item {
+        padding: 0px;
+    }
     .table-nav,
     .index,
     .album,
@@ -938,6 +941,9 @@ leftbar div.card {
         display: none;
     }
     .title {
+        width: 100%;
+    }
+    .img-title-box {
         width: 100%;
     }
 

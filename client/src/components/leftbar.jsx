@@ -172,6 +172,42 @@ const Leftbar = () => {
                                                     )
                                                 }}
                                             >
+                                                {/* song img */}
+                                                {/* if playlist */}
+                                                {songInfo?.spotify_playlist
+                                                    ?.type === 'playlist' && (
+                                                    <img
+                                                        src={
+                                                            item?.track?.album
+                                                                ?.images?.[2]
+                                                                ?.url
+                                                        }
+                                                        className="title-img"
+                                                        style={{
+                                                            height: '35px',
+                                                            width: '35px',
+                                                        }}
+                                                    />
+                                                )}
+
+                                                {/* if album */}
+                                                {songInfo?.spotify_playlist
+                                                    ?.type === 'album' && (
+                                                    <img
+                                                        src={
+                                                            songInfo
+                                                                ?.spotify_playlist
+                                                                ?.images?.[2]
+                                                                ?.url
+                                                        }
+                                                        className="title-img"
+                                                        style={{
+                                                            height: '35px',
+                                                            width: '35px',
+                                                        }}
+                                                    />
+                                                )}
+
                                                 <div className="column leftbar-title">
                                                     {item?.track && (
                                                         <>

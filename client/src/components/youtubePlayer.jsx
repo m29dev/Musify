@@ -82,9 +82,16 @@ const YoutubePlayer = () => {
     const [classVar, setClassVar] = useState('flr')
 
     useEffect(() => {
-        if (fullScreenMode) setClassVar('player-home-page')
-        if (!fullScreenMode && !hideRightbar) setClassVar('player-rightbar')
-        if (!fullScreenMode && hideRightbar) setClassVar('player-hidden')
+        if (window.innerWidth > 1500) {
+            if (fullScreenMode) setClassVar('player-home-page')
+            if (!fullScreenMode && !hideRightbar) setClassVar('player-rightbar')
+            if (!fullScreenMode && hideRightbar) setClassVar('player-hidden')
+        }
+
+        if (window.innerWidth <= 1500) {
+            if (fullScreenMode) setClassVar('player-home-page')
+            if (!fullScreenMode) setClassVar('player-hidden')
+        }
 
         // if (!fullScreenMode && !hideLeftbar && !hideRightbar) setClassVar('_lr')
         // if (!fullScreenMode && hideLeftbar && !hideRightbar) setClassVar('__r')

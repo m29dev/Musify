@@ -109,7 +109,7 @@ const Navbar = () => {
                             }}
                         >
                             <BiHomeAlt2 className="control-panel-btn"></BiHomeAlt2>
-                            Home
+                            <div className="navbar-btn-title">Home</div>
                         </div>
 
                         {/* search */}
@@ -120,7 +120,7 @@ const Navbar = () => {
                             }}
                         >
                             <AiOutlineSearch className="control-panel-btn"></AiOutlineSearch>
-                            Search
+                            <div className="navbar-btn-title">Search</div>
                         </div>
 
                         {/* playlists */}
@@ -131,7 +131,7 @@ const Navbar = () => {
                             }}
                         >
                             <BiSolidPlaylist className="control-panel-btn"></BiSolidPlaylist>
-                            Playlists
+                            <div className="navbar-btn-title">Playlists</div>
                         </div>
 
                         {/* albums */}
@@ -142,7 +142,7 @@ const Navbar = () => {
                             }}
                         >
                             <LuAlbum className="control-panel-btn"></LuAlbum>
-                            Albums
+                            <div className="navbar-btn-title">Albums</div>
                         </div>
                     </div>
 

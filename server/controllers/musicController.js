@@ -114,7 +114,7 @@ const songs_saved_get = async (req, res) => {
 // search for songs / artists / albums / playlists
 const search_query_get = async (req, res) => {
     try {
-        const { access_token, query } = req.params
+        let { access_token, query } = req.params
 
         const url = `https://api.spotify.com/v1/search?q=${query}&type=track,playlist,album,artist`
         const headers = {
@@ -136,8 +136,6 @@ const search_query_get = async (req, res) => {
 // saved fav artists
 const artists_saved_get = async (req, res) => {
     try {
-        console.log('artists_saved_get')
-
         const { access_token } = req.params
 
         const url = 'https://api.spotify.com/v1/me/following?type=artist'
@@ -171,7 +169,6 @@ const artists_id_get = async (req, res) => {
         const artist = await fetch(url, { headers })
         const data = await artist.json()
         if (!data) return res.status(400).json({ message: 'err' })
-        console.log(data)
 
         // artist albums
         const urlAlbums = `https://api.spotify.com/v1/artists/${id}/albums`

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsGithub } from 'react-icons/bs'
 import {
     TbLayoutSidebarRightCollapseFilled,
@@ -13,40 +13,31 @@ const Rightbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const artistsBoxRef = useRef(null)
-    const titleBoxRef = useRef(null)
-
     const [sliderTitle, setSliderTitle] = useState(false)
     const [sldierArtists, setSliderArtists] = useState(false)
 
     useEffect(() => {
         // title slider toggle
-        //const attachTitle = document.querySelector('.title-slider-attach')
         const getTitle = document.querySelector('.get-title')
-        if (+getTitle?.offsetWidth >= +titleBoxRef?.current?.offsetWidth) {
-            // attachTitle?.classList?.add('slider-track')
+        console.log(getTitle?.innerHTML?.length)
+        if (getTitle?.innerHTML?.length >= 23) {
             setSliderTitle(true)
             console.log('title TRUE SLIDER')
         } else {
-            // attachTitle?.classList?.remove('slider-track')
             setSliderTitle(false)
             console.log('title FALSE')
         }
 
         // aritsts slider toggle
-        //const attachArtists = document.querySelector('.artists-slider-attach')
         const artists = document.querySelectorAll('.rightbar-artists')
         let artistsAllWidth = 0
         artists?.forEach((artist) => {
             artistsAllWidth += artist?.offsetWidth
         })
-        const artistsBoxWidth = artistsBoxRef?.current?.offsetWidth
-        if (+artistsAllWidth >= +artistsBoxWidth) {
-            // attachArtists?.classList?.add('slider-track')
+        if (+artistsAllWidth >= 400) {
             setSliderArtists(true)
             console.log('artists TRUE SLIDER')
         } else {
-            // attachArtists?.classList?.remove('slider-track')
             setSliderArtists(false)
             console.log('artists FALSE')
         }
@@ -83,17 +74,10 @@ const Rightbar = () => {
                     </div>
                 </div>
 
-                {/* YouTube player box */}
                 {!hideRightbar && (
                     <>
                         {
-                            <div
-                                className="rightbar-img-box"
-                                style={{
-                                    border: 'solid 1px gray',
-                                    borderRadius: '18px',
-                                }}
-                            >
+                            <div className="rightbar-img-box">
                                 {songInfo?.spotify_song?.album?.images ? (
                                     <img
                                         src={
@@ -136,19 +120,20 @@ const Rightbar = () => {
 
                         {/* title slider */}
                         <div
-                            ref={titleBoxRef}
                             className="slider-marquee"
                             style={{ height: '35px' }}
                         >
                             <div className={sliderTitle ? 'slider-track' : ''}>
-                                <div className="get-title">
-                                    <h1>{songInfo?.spotify_song?.name}</h1>
+                                <div>
+                                    <h1 className="get-title">
+                                        {songInfo?.spotify_song?.name}
+                                    </h1>
                                 </div>
                             </div>
                         </div>
 
                         {/* artists slider */}
-                        <div ref={artistsBoxRef} className="slider-marquee">
+                        <div className="slider-marquee">
                             <div
                                 className={sldierArtists ? 'slider-track' : ''}
                             >

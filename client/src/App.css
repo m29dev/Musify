@@ -33,7 +33,7 @@ body {
 /* navbar */
 .navbar-box {
     width: 100%;
-    height: 50px;
+    height: 30px;
     border-radius: 18px;
     display: flex;
     justify-content: space-between;
@@ -94,7 +94,7 @@ svg {
     width: 100%;
     height: 64px;
     padding: 8px;
-    margin-top: 23px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -182,11 +182,11 @@ svg {
 }
 
 .rightbar-img-box {
-    /* border-radius: 18px;
-    border: solid 1px gray; */
+    border-radius: 18px;
+    border: solid 1px gray;
     width: 100%;
     aspect-ratio: 1 / 1;
-    margin-top: 31px;
+    margin-top: 8px;
     margin-bottom: 18px;
 }
 .rightbar-img-box-absolute {
@@ -245,7 +245,7 @@ svg {
 }
 
 .center-box {
-    min-width: 1000px;
+    /* min-width: 1000px; */
     width: 100%;
     height: 100%;
     padding: 23px;
@@ -282,18 +282,27 @@ svg {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 23% 23% 23% 23%;
-    /* grid-template-columns: 18% 18% 18% 18% 18%; */
     column-gap: 23px;
     row-gap: 23px;
     padding: 0px;
     overflow: auto;
     max-height: 100%;
     margin-top: 23px;
-    margin-bottom: 55px;
+    /* margin-bottom: 55px; */
 }
+.home-box-classic {
+    grid-template-columns: 23% 23% 23% 23%;
+}
+.home-box-wide {
+    grid-template-columns: 18% 18% 18% 18% 18%;
+}
+.home-box-very-wide {
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
+}
+
 .home-box-item {
-    height: 350px;
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
     cursor: pointer;
 }
 .card-item {
@@ -614,10 +623,9 @@ svg.control-panel-btn {
 /* SEARCH RESULTS */
 .search-results-box {
     height: 100%;
-    margin-bottom: 70px;
     overflow: auto;
     padding-right: 23px;
-    margin-top: 30px;
+    margin-top: 23px;
 }
 .search-results-box h3 {
     margin-top: 30px;
@@ -786,9 +794,120 @@ leftbar div.card {
     visibility: hidden;
 }
 
+.welcome-h1 {
+    font-size: 7vw;
+}
+.welcome-h5 {
+    font-size: 2vw;
+}
+
 /* MOBILE SCREEN */
-/* @media screen and (max-width: 1900px) {
+@media screen and (max-width: 1500px) {
+    /* main config */
+    .main-box {
+        padding: 0px;
+    }
+    .center-box {
+        border-radius: 0px;
+        margin: 0px;
+    }
+
+    /* navbar, hide bars */
+    .navbar-btn-title {
+        display: none;
+    }
     .bar-box {
         display: none;
     }
-} */
+
+    /* youtube player */
+    .test-home-box {
+        padding-bottom: 135px;
+    }
+
+    /* control panel */
+    .control-panel-box-absolute {
+        flex-direction: column;
+    }
+    .control-panel-center,
+    .control-panel-left {
+        width: 100%;
+        padding: 0px;
+    }
+    .control-panel-left {
+        margin-bottom: 4px;
+    }
+    .control-panel-btn-box {
+        width: 100%;
+        justify-content: center;
+    }
+    .control-panel-right {
+        display: none;
+    }
+
+    /* search form */
+    .form-control {
+        margin-top: 23px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    /* search results */
+    .search-results-grid {
+        width: 100%;
+        position: relative;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        row-gap: 23px;
+        overflow: auto;
+    }
+    .search-results-box {
+        padding: 0px;
+    }
+    .card-item {
+        min-width: 100px;
+    }
+
+    /* albums details */
+    .playlist-details-navbar {
+        flex-direction: column;
+        /*  */
+    }
+    .playlist-details-info {
+        padding: 0px;
+    }
+    .playlist-details-img-box {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+    .center-box {
+        overflow: auto;
+    }
+    .search-results-box {
+        overflow: visible;
+    }
+    .playlist-name {
+        font-size: 10vw;
+        overflow: hidden;
+    }
+    .table-item {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* playlists / albums */
+    .home-box-classic {
+        grid-template-columns: 46% 46%;
+    }
+    p.card-text {
+        max-height: 50px;
+        font-size: 15px;
+        overflow: hidden;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}

@@ -85,7 +85,6 @@ const DetailsBox = (playlistData) => {
                 style={{
                     maxHeight: '100%',
                     overflow: 'auto',
-                    marginBottom: '55px',
                 }}
             >
                 {/* navbar */}

@@ -23,7 +23,6 @@ const Search = () => {
     const getSearchResults = useCallback(
         async (query) => {
             try {
-                console.log('gsr')
                 // GET SEARCH RESULTS
                 const res = await getSearchQuery({
                     access_token: authInfo?.access_token,
@@ -66,14 +65,12 @@ const Search = () => {
 
     // on searchParams update GET SEARCH RESULTS
     useEffect(() => {
-        console.log('searchin from UF: ', searchParams?.get('q'))
         if (searchParams?.get('q') === '') return
         getSearchResults(searchParams?.get('q'))
     }, [searchParams, getSearchResults])
 
     // on init set search value same as in searchParams if exists
     useEffect(() => {
-        console.log('on init: set serach value')
         if (searchParams?.get('q')) {
             setSearchQuery(searchParams?.get('q'))
         }

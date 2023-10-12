@@ -26,13 +26,21 @@ const Home = () => {
             <Navbar></Navbar>
 
             {!authInfo && (
-                <div style={{ padding: '23px', textAlign: 'center' }}>
-                    <h1>Musify is the place for a real music enthusiasts.</h1>
-                    <h5>
+                <div
+                    style={{
+                        padding: '23px',
+                        textAlign: 'center',
+                        marginTop: '50px',
+                    }}
+                >
+                    <h1 className="welcome-h1">
+                        Musify is the place for a real music enthusiasts.
+                    </h1>
+                    <h5 className="welcome-h5">
                         listen to your favorites tracks, artists, playlists,
                         alubums,
                     </h5>
-                    <h5>
+                    <h5 className="welcome-h5">
                         whatever You want, all with an Official Music Video.
                     </h5>
                 </div>

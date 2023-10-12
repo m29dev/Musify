@@ -23,7 +23,7 @@ const SearchResultArtists = (artists) => {
                             >
                                 <Card.Img
                                     variant="top"
-                                    src={artist?.images?.[2]?.url}
+                                    src={artist?.images?.[0]?.url}
                                     className="card-img-box img-artists"
                                 />
                                 <Card.Body>

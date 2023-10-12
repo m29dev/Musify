@@ -6,7 +6,9 @@ import { Container } from 'react-bootstrap'
 import CardComponent from '../components/card'
 
 const Albums = () => {
-    const { authInfo } = useSelector((state) => state.auth)
+    const { authInfo, hideLeftbar, hideRightbar } = useSelector(
+        (state) => state.auth
+    )
     const [getAlbums] = useGetAllAlbumsMutation()
     const [albums, setAlbums] = useState(null)
 
@@ -24,13 +26,23 @@ const Albums = () => {
         getAlbumsData()
     }, [getAlbumsData])
 
+    const [classVar, setClassVar] = useState('')
+    useEffect(() => {
+        if (!hideLeftbar && !hideRightbar)
+            setClassVar('home-box home-box-classic')
+        if (hideLeftbar && !hideRightbar) setClassVar('home-box home-box-wide')
+        if (!hideLeftbar && hideRightbar) setClassVar('home-box home-box-wide')
+        if (hideLeftbar && hideRightbar)
+            setClassVar('home-box home-box-very-wide')
+    }, [hideLeftbar, hideRightbar, setClassVar])
+
     return (
         <>
             <div className="center-box">
                 {/* navbar main */}
                 <Navbar></Navbar>
 
-                <Container fluid className="home-box">
+                <Container fluid className={classVar}>
                     {albums?.items?.map((album) => {
                         return (
                             <div

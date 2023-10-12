@@ -197,6 +197,30 @@ const artists_id_get = async (req, res) => {
     }
 }
 
+// GET
+// top song
+const user_top_song_get = async (req, res) => {
+    try {
+        const { access_token } = req.params
+        const { id } = req.body
+
+        // artist info
+        const url = `https://api.spotify.com/v1/me/top/artists`
+        const headers = {
+            Authorization: 'Bearer ' + access_token,
+        }
+        const artist = await fetch(url, { headers })
+        const data = await artist.json()
+        console.log(data)
+
+        // if (!data) return res.status(400).json({ message: 'err' })
+
+        // res.status(200).json(dataObject)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     playlists_get,
     playlists_id_get,
@@ -206,4 +230,5 @@ module.exports = {
     search_query_get,
     artists_saved_get,
     artists_id_get,
+    user_top_song_get,
 }

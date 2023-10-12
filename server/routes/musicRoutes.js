@@ -13,6 +13,7 @@ router.post('/api/music/albums/:access_token', controller.albums_id_get)
 
 // songs
 router.get('/api/music/songs/saved/:access_token', controller.songs_saved_get)
+router.get('/api/music/songs/top/:access_token', controller.user_top_song_get)
 
 // search
 router.get(

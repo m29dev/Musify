@@ -1,11 +1,12 @@
 import Navbar from '../components/navbar'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFullScreenMode } from '../redux/authSlice'
 import { BsGithub } from 'react-icons/bs'
+import { useGetSongsTopMutation } from '../services/musicService'
 
 const Home = () => {
-    const { authInfo } = useSelector((state) => state.auth)
+    const { authInfo, songInfo } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
 
     // on HomePage init set fullScreen mode to true
@@ -20,6 +21,24 @@ const Home = () => {
             dispatch(setFullScreenMode(false))
         }
     }, [dispatch])
+
+    const [topSongs] = useGetSongsTopMutation()
+
+    const getTopSongs = useCallback(async () => {
+        try {
+            const res = await topSongs().unwrap()
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }, [topSongs])
+
+    useEffect(() => {
+        if (!songInfo) {
+            console.log('fetch top song')
+            getTopSongs()
+        }
+    }, [songInfo, getTopSongs])
 
     return (
         <div className="center-box test-home-page">

@@ -72,6 +72,14 @@ export const musicApiSlice = apiSlice.injectEndpoints({
                 body: { id: data.id },
             }),
         }),
+
+        // user's top songs
+        getSongsTop: builder.mutation({
+            query: (access_token) => ({
+                url: `${MUSIC_URL}/songs/top/${access_token}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -85,4 +93,5 @@ export const {
     useSearchQueryMutation,
     useGetArtistsSavedMutation,
     useGetArtistIdMutation,
+    useGetSongsTopMutation,
 } = musicApiSlice

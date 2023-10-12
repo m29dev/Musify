@@ -201,10 +201,10 @@ const artists_id_get = async (req, res) => {
 // top song
 const user_top_song_get = async (req, res) => {
     try {
-        const { access_token } = req.params
+        const { access_token } = req.param
 
         // artist info
-        const url = `https://api.spotify.com/v1/me/player/recently-played`
+        const url = `https://api.spotify.com/v1/tracks/`
         const headers = {
             Authorization: 'Bearer ' + access_token,
         }

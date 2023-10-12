@@ -4,7 +4,7 @@ const playlists_get = async (req, res) => {
     try {
         const { access_token } = req.params
 
-        const url = 'https://api.spotify.com/v1/me/playlists'
+        const url = 'https://api.spotify.com/v1/me/player/recently-played'
         const headers = {
             Authorization: 'Bearer ' + access_token,
         }

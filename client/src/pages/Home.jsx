@@ -34,15 +34,8 @@ const Home = () => {
                     }}
                 >
                     <h1 className="welcome-h1">
-                        Musify is the place for a real music enthusiasts.
+                        Just the place for true music connoisseurs.
                     </h1>
-                    <h5 className="welcome-h5">
-                        listen to your favorites tracks, artists, playlists,
-                        alubums,
-                    </h5>
-                    <h5 className="welcome-h5">
-                        whatever You want, all with an Official Music Video.
-                    </h5>
                 </div>
             )}
         </div>

@@ -2,10 +2,10 @@
 <p id="description">Musify's the place where you can listen to Your favorite music with it's official music video.</p>
 <p id="description">Application's a combination of the Spotify's music data and the YouTube's music videos</p>
 
-<h2>🚀 Demo</h2>
+<h2>🚀 Demo</h2
+[https://musifyclient.onrender.com)
 
 <h2>💻 Built with</h2>
-
 Technologies used in the project:
 
 *   Express.js

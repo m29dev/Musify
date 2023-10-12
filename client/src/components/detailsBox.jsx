@@ -171,7 +171,7 @@ const DetailsBox = (playlistData) => {
                     {/* table nav */}
                     <div className="table-nav">
                         <div className="column index">#</div>
-                        <div className="column title">Title</div>
+                        <div className="column img-title-box">Title</div>
                         {playlist?.type === 'playlist' ? (
                             <div className="column album">Album</div>
                         ) : (
@@ -198,45 +198,65 @@ const DetailsBox = (playlistData) => {
                                 {/* id */}
                                 <div className="column index">{index + 1}</div>
 
-                                {/* title */}
-                                <div className="column title">
+                                <div className="column img-title-box">
                                     {/* if playlist */}
-                                    {item?.track && (
-                                        <>
-                                            <h1>{item?.track?.name}</h1>
-
-                                            <div className="album-artists-box">
-                                                {item?.track?.artists?.map(
-                                                    (artist, index) => (
-                                                        <h4 key={index}>
-                                                            {index > 0
-                                                                ? `, ${artist?.name}`
-                                                                : artist?.name}
-                                                        </h4>
-                                                    )
-                                                )}
-                                            </div>
-                                        </>
+                                    {playlist?.type === 'playlist' && (
+                                        <img
+                                            src={
+                                                item?.track?.album?.images?.[2]
+                                                    ?.url
+                                            }
+                                            className="title-img"
+                                        />
                                     )}
 
                                     {/* if album */}
-                                    {item?.name && (
-                                        <>
-                                            <h1>{item?.name}</h1>
-
-                                            <div className="album-artists-box">
-                                                {item?.artists?.map(
-                                                    (artist, index) => (
-                                                        <h4 key={index}>
-                                                            {index > 0
-                                                                ? `, ${artist?.name}`
-                                                                : artist?.name}
-                                                        </h4>
-                                                    )
-                                                )}
-                                            </div>
-                                        </>
+                                    {playlist?.type === 'album' && (
+                                        <img
+                                            src={playlist?.images?.[2]?.url}
+                                            className="title-img"
+                                        />
                                     )}
+
+                                    {/* title */}
+                                    <div className="column title">
+                                        {/* if playlist */}
+                                        {item?.track && (
+                                            <>
+                                                <h1>{item?.track?.name}</h1>
+                                                <div className="album-artists-box">
+                                                    {item?.track?.artists?.map(
+                                                        (artist, index) => (
+                                                            <h4 key={index}>
+                                                                {index > 0
+                                                                    ? `, ${artist?.name}`
+                                                                    : artist?.name}
+                                                            </h4>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {/* if album */}
+                                        {item?.name && (
+                                            <>
+                                                <h1>{item?.name}</h1>
+
+                                                <div className="album-artists-box">
+                                                    {item?.artists?.map(
+                                                        (artist, index) => (
+                                                            <h4 key={index}>
+                                                                {index > 0
+                                                                    ? `, ${artist?.name}`
+                                                                    : artist?.name}
+                                                            </h4>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Album */}

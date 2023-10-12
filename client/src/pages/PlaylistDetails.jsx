@@ -8,7 +8,9 @@ import DetailsBox from '../components/detailsBox'
 const PlaylistDetails = () => {
     const [playlistId] = useGetPlaylistIdMutation()
     const params = useParams()
-    const { authInfo } = useSelector((state) => state.auth)
+    const { authInfo, hideLeftbar, hideRightbar } = useSelector(
+        (state) => state.auth
+    )
     const [playlist, setPlaylist] = useState(null)
 
     const getPlaylistId = useCallback(async () => {
@@ -27,8 +29,20 @@ const PlaylistDetails = () => {
         getPlaylistId()
     }, [getPlaylistId])
 
+    const [maxWidth, setMaxWidth] = useState(false)
+    useEffect(() => {
+        if (window.innerWidth > 1500 && !hideLeftbar && !hideRightbar) {
+            setMaxWidth(true)
+        } else {
+            setMaxWidth(false)
+        }
+    }, [hideLeftbar, hideRightbar, setMaxWidth])
+
     return (
-        <div className="center-box">
+        <div
+            className="center-box"
+            style={maxWidth ? { maxWidth: '1004px' } : {}}
+        >
             {/* navbar main */}
             <Navbar></Navbar>
             {playlist && <DetailsBox playlist={playlist}></DetailsBox>}

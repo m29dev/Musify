@@ -394,7 +394,7 @@ svg {
     display: flex;
     justify-content: space-between;
     border-bottom: solid 1px gray;
-    padding: 16px;
+    padding: 46px 16px;
     padding-bottom: 4px;
     color: #b3b3b3;
 }
@@ -407,6 +407,17 @@ svg {
     align-items: center;
     cursor: pointer;
     padding: 0px 16px;
+    overflow: hidden;
+}
+.title h1 {
+    overflow: hidden;
+}
+.title {
+    overflow: hidden;
+}
+.album {
+    overflow: hidden;
+    max-height: 48px;
 }
 .table-item-active {
     width: 100%;
@@ -424,8 +435,17 @@ svg {
     text-align: end;
     color: #b3b3b3;
 }
-.title {
+.img-title-box {
     width: 45%;
+    display: flex;
+    align-items: center;
+}
+.title-img {
+    height: 48px;
+    width: 48px;
+    margin-right: 18px;
+}
+.title {
     display: flex;
     flex-direction: column;
 }
@@ -455,7 +475,7 @@ svg {
     white-space: nowrap;
 }
 .album {
-    width: 40%;
+    width: 45%;
     color: white !important;
 }
 .time {
@@ -603,6 +623,7 @@ svg.control-panel-btn {
     border-radius: 18px;
     color: white;
     width: 430px;
+    margin-top: 23px;
 }
 .form-control:hover {
     border-color: #383838 !important;
@@ -904,6 +925,20 @@ leftbar div.card {
         max-height: 50px;
         font-size: 15px;
         overflow: hidden;
+    }
+
+    /* playlist / album table items */
+    .table-box {
+        margin-top: 23px;
+    }
+    .table-nav,
+    .index,
+    .album,
+    .time {
+        display: none;
+    }
+    .title {
+        width: 100%;
     }
 
     /* scrollbar */

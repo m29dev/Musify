@@ -12,16 +12,18 @@ const sign_in = async (req, res) => {
             playlist-read-private
             playlist-modify-public`
 
-        res.redirect(
-            'https://accounts.spotify.com/authorize?' +
-                querystring.stringify({
-                    response_type: 'code',
-                    client_id: process.env.SPOTIFY_CLIENT_ID,
-                    scope: scope,
-                    redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
-                    state: 1234567890123456,
-                })
-        )
+        res.json({ message: 'sing_in_works' })
+
+        // res.redirect(
+        //     'https://accounts.spotify.com/authorize?' +
+        //         querystring.stringify({
+        //             response_type: 'code',
+        //             client_id: process.env.SPOTIFY_CLIENT_ID,
+        //             scope: scope,
+        //             redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+        //             state: 1234567890123456,
+        //         })
+        // )
     } catch (err) {
         console.log(err)
     }

@@ -12,7 +12,12 @@ const sign_in = async (req, res) => {
             playlist-read-private
             playlist-modify-public`
 
-        res.json({ message: 'sing_in_works' })
+        const obj = {
+            client_id: process.env.SPOTIFY_CLIENT_ID,
+            redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+        }
+
+        res.json(obj)
 
         // res.redirect(
         //     'https://accounts.spotify.com/authorize?' +

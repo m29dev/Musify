@@ -2,6 +2,7 @@ import Navbar from '../components/navbar'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFullScreenMode } from '../redux/authSlice'
+import { BsGithub } from 'react-icons/bs'
 
 const Home = () => {
     const { authInfo } = useSelector((state) => state.auth)
@@ -26,16 +27,22 @@ const Home = () => {
             <Navbar></Navbar>
 
             {!authInfo && (
-                <div
-                    style={{
-                        padding: '23px',
-                        textAlign: 'center',
-                        marginTop: '50px',
-                    }}
-                >
-                    <h1 className="welcome-h1">
+                <div className="welcome-box">
+                    <div className="welcome-brand">
+                        <h1 className="welcome-h1">Musify</h1>
+                    </div>
+                    <h2 className="welcome-h2">
                         Just the place for true music connoisseurs.
-                    </h1>
+                    </h2>
+                </div>
+            )}
+
+            {!authInfo && (
+                <div className="about-info home-about-info">
+                    <a href="https://github.com/m29dev/Musify">
+                        Musify <BsGithub></BsGithub>
+                    </a>
+                    <h4>©Michał Majchrzak, 2023.</h4>
                 </div>
             )}
         </div>

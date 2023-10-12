@@ -174,7 +174,10 @@ const Navbar = () => {
             )}
 
             {authMode && (
-                <div className="navbar-box">
+                <div
+                    className="navbar-box"
+                    style={{ justifyContent: 'center' }}
+                >
                     <a href="http://localhost:3000/api/auth/signin">
                         Sign In via Spotify <ImSpotify></ImSpotify>
                     </a>

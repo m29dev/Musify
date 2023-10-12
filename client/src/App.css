@@ -816,10 +816,46 @@ leftbar div.card {
 }
 
 .welcome-h1 {
-    font-size: 7vw;
+    font-size: 14vw;
 }
-.welcome-h5 {
-    font-size: 2vw;
+.welcome-h2 {
+    font-size: 4vw;
+}
+
+.welcome-box {
+    padding: 23px;
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 100;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.welcome-icon-box {
+    height: 100%;
+    max-height: 200px;
+    width: auto;
+    aspect-ratio: 1 / 1;
+}
+.welcome-brand {
+    display: flex;
+}
+.home-about-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    padding-bottom: 12px;
+}
+.home-about-info h4 {
+    margin-top: 8px;
 }
 
 /* MOBILE SCREEN */
@@ -942,6 +978,13 @@ leftbar div.card {
     }
     .img-title-box {
         width: 100%;
+    }
+
+    .welcome-h1 {
+        font-size: 20vw;
+    }
+    .welcome-h2 {
+        font-size: 4vw;
     }
 
     /* scrollbar */

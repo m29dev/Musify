@@ -203,13 +203,13 @@ const user_top_song_get = async (req, res) => {
     try {
         const { access_token } = req.param
 
-        // artist info
-        const url = `https://api.spotify.com/v1/tracks/1Z18G3Uk0uIgGwa8ugDhrX`
+        // top songs
+        const url = `https://api.spotify.com/v1/me/top/tracks`
         const headers = {
             Authorization: 'Bearer ' + access_token,
         }
-        const artist = await fetch(url, { headers })
-        const data = await artist.json()
+        const topSongs = await fetch(url, { headers })
+        const data = await topSongs.json()
 
         if (!data) return res.status(400).json({ message: 'err' })
         res.status(200).json(data)

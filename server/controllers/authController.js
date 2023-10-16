@@ -58,7 +58,6 @@ const signed_in = async (req, res) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('success_1: ', data)
                 const query = querystring.stringify(data)
                 res.redirect(
                     `${process.env.SPOTIFY_CLIENT_REDIRECT_URI}?${query}`

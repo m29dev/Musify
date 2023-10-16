@@ -201,8 +201,7 @@ const artists_id_get = async (req, res) => {
 // top song
 const user_top_song_get = async (req, res) => {
     try {
-        const { access_token } = req.param
-        console.log('access token: ', access_token)
+        const { access_token } = req.params
 
         // top songs
         const url = `https://api.spotify.com/v1/me/top/tracks`

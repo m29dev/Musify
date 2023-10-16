@@ -3,10 +3,15 @@ import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFullScreenMode, setSongInfo } from '../redux/authSlice'
 import { BsGithub } from 'react-icons/bs'
-import { useGetSongsTopMutation } from '../services/musicService'
+import {
+    useGetSongIdMutation,
+    useGetSongsTopMutation,
+} from '../services/musicService'
 
 const Home = () => {
-    const { authInfo, songInfo } = useSelector((state) => state.auth)
+    const { authInfo, songInfo, accountInfo } = useSelector(
+        (state) => state.auth
+    )
     const dispatch = useDispatch()
 
     // on HomePage init set fullScreen mode to true
@@ -23,29 +28,32 @@ const Home = () => {
     }, [dispatch])
 
     const [topSongs] = useGetSongsTopMutation()
+    const [getSong] = useGetSongIdMutation()
     const getTopSongs = useCallback(async () => {
         try {
             const res = await topSongs(authInfo?.access_token).unwrap()
-            console.log('fetching top_songs')
-            console.log(authInfo?.access_token)
-            console.log(res)
 
-            // const songInfoObject = {
-            //     index,
-            //     spotify_playlist: {
-            //         tracks: { items: tracks?.tracksData },
-            //         type: `album`,
-            //         name: `${songArtist} - Radio`,
-            //         images: track?.album?.images,
-            //     },
-            //     spotify_song: track,
-            //     youtube_song: res,
-            // }
-            dispatch(setSongInfo(res))
+            const songArtist = res?.items?.[0]?.artists?.[0]?.name
+            const songName = res?.items?.[0]?.name
+
+            const resYt = await getSong(`${songArtist} - ${songName}`).unwrap()
+
+            const songInfoObject = {
+                index: 0,
+                spotify_playlist: {
+                    tracks: { items: res?.items },
+                    type: `playlist`,
+                    name: `${accountInfo.display_name}'s Top Songs`,
+                    images: res?.items?.[0]?.album?.images,
+                },
+                spotify_song: res?.items?.[0],
+                youtube_song: resYt,
+            }
+            dispatch(setSongInfo(songInfoObject))
         } catch (err) {
             console.log(err)
         }
-    }, [topSongs, authInfo, dispatch])
+    }, [topSongs, getSong, authInfo, accountInfo, dispatch])
 
     useEffect(() => {
         if (!songInfo) {

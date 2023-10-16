@@ -27,6 +27,7 @@ const Home = () => {
         try {
             const res = await topSongs(authInfo?.access_token).unwrap()
             console.log('fetching top_songs')
+            console.log(authInfo?.access_token)
             console.log(res)
 
             // const songInfoObject = {
@@ -48,7 +49,6 @@ const Home = () => {
 
     useEffect(() => {
         if (!songInfo) {
-            console.log('fetch top song')
             getTopSongs()
         }
     }, [songInfo, getTopSongs])

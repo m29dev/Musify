@@ -26,6 +26,9 @@ const Home = () => {
     const getTopSongs = useCallback(async () => {
         try {
             const res = await topSongs(authInfo?.access_token).unwrap()
+
+            console.log(res)
+
             // const songInfoObject = {
             //     index,
             //     spotify_playlist: {
@@ -37,11 +40,11 @@ const Home = () => {
             //     spotify_song: track,
             //     youtube_song: res,
             // }
-            dispatch(setSongInfo(res))
+            //dispatch(setSongInfo(res))
         } catch (err) {
             console.log(err)
         }
-    }, [topSongs])
+    }, [topSongs, authInfo])
 
     useEffect(() => {
         if (!songInfo) {

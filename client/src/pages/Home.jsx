@@ -1,7 +1,7 @@
 import Navbar from '../components/navbar'
 import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFullScreenMode } from '../redux/authSlice'
+import { setFullScreenMode, setSongInfo } from '../redux/authSlice'
 import { BsGithub } from 'react-icons/bs'
 import { useGetSongsTopMutation } from '../services/musicService'
 
@@ -23,11 +23,21 @@ const Home = () => {
     }, [dispatch])
 
     const [topSongs] = useGetSongsTopMutation()
-
     const getTopSongs = useCallback(async () => {
         try {
-            const res = await topSongs().unwrap()
-            console.log(res)
+            const res = await topSongs(authInfo?.access_token).unwrap()
+            // const songInfoObject = {
+            //     index,
+            //     spotify_playlist: {
+            //         tracks: { items: tracks?.tracksData },
+            //         type: `album`,
+            //         name: `${songArtist} - Radio`,
+            //         images: track?.album?.images,
+            //     },
+            //     spotify_song: track,
+            //     youtube_song: res,
+            // }
+            dispatch(setSongInfo(res))
         } catch (err) {
             console.log(err)
         }

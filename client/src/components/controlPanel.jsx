@@ -14,8 +14,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const ControlPanel = () => {
-    const { songInfo } = useSelector((state) => state.auth)
-    const { controlPanelInfo } = useSelector((state) => state.auth)
+    const { songInfo, controlPanelInfo, authInfo } = useSelector(
+        (state) => state.auth
+    )
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [getSong] = useGetSongIdMutation()
@@ -105,7 +106,7 @@ const ControlPanel = () => {
     return (
         <>
             {/* CONTROL PANEL */}
-            {songInfo && (
+            {songInfo && authInfo && (
                 <div className="control-panel-box-absolute">
                     {/* left bar */}
                     <div className="control-panel-left">

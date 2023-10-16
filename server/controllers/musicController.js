@@ -204,7 +204,7 @@ const user_top_song_get = async (req, res) => {
         const { access_token } = req.param
 
         // artist info
-        const url = `https://api.spotify.com/v1/tracks/`
+        const url = `https://api.spotify.com/v1/tracks/1Z18G3Uk0uIgGwa8ugDhrX`
         const headers = {
             Authorization: 'Bearer ' + access_token,
         }

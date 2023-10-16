@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { BsGithub } from 'react-icons/bs'
 import {
     TbLayoutSidebarRightCollapseFilled,
     TbLayoutSidebarRightExpandFilled,
@@ -151,16 +150,6 @@ const Rightbar = () => {
                                         )
                                     )}
                                 </div>
-                            </div>
-
-                            <div style={{ flexGrow: 1 }}></div>
-
-                            {/* about info */}
-                            <div className="about-info">
-                                <a href="https://github.com/m29dev/Musify">
-                                    Musify <BsGithub></BsGithub>
-                                </a>
-                                <h4>©Michał Majchrzak, 2023.</h4>
                             </div>
                         </>
                     )}

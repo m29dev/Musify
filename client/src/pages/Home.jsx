@@ -26,7 +26,7 @@ const Home = () => {
     const getTopSongs = useCallback(async () => {
         try {
             const res = await topSongs(authInfo?.access_token).unwrap()
-
+            console.log('fetching top_songs')
             console.log(res)
 
             // const songInfoObject = {

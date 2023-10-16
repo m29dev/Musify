@@ -49,7 +49,7 @@ const Search = () => {
 
     const onSearchQuery = async (query) => {
         try {
-            if (query === '') {
+            if (query === ('' || null)) {
                 setTracks(null),
                     setArtists(null),
                     setPlaylists(null),
@@ -65,7 +65,7 @@ const Search = () => {
 
     // on searchParams update GET SEARCH RESULTS
     useEffect(() => {
-        if (searchParams?.get('q') === '') return
+        if (searchParams?.get('q') === ('' || null)) return
         getSearchResults(searchParams?.get('q'))
     }, [searchParams, getSearchResults])
 

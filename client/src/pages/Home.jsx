@@ -40,11 +40,11 @@ const Home = () => {
             //     spotify_song: track,
             //     youtube_song: res,
             // }
-            //dispatch(setSongInfo(res))
+            dispatch(setSongInfo(res))
         } catch (err) {
             console.log(err)
         }
-    }, [topSongs, authInfo])
+    }, [topSongs, authInfo, dispatch])
 
     useEffect(() => {
         if (!songInfo) {

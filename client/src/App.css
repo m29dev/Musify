@@ -259,7 +259,7 @@ svg {
     );
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .center-box-home {
     background-color: black !important;

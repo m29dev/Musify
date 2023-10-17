@@ -41,10 +41,10 @@ Here're some of the project's best features:
 <img src="https://github.com/m29dev/Musify/assets/123384597/1f00153b-e9a4-4e5e-911f-690a7cfbbb5a" alt="project-screenshot" height="200">
 <img src="https://github.com/m29dev/Musify/assets/123384597/94e09434-875c-47fa-b9b9-36cc47bb4c86" alt="project-screenshot" height="200">
 
-3.2 Layout with leftbar hidden </br>
+3.2 Layout with one of the sidebars hidden </br>
 <img src="https://github.com/m29dev/Musify/assets/123384597/985181d4-da6a-4b0d-8d02-76dfe1fd4fb9" alt="project-screenshot" height="200">
 
-3.3 Layout with rightbar hidden </br>
+3.3 Layout with no sidebars </br>
 <img src="https://github.com/m29dev/Musify/assets/123384597/98771ee3-8298-4292-97da-97fbdde0a38e" alt="project-screenshot" height="200">
 
 4. Search page

@@ -72,7 +72,7 @@ const Home = () => {
                         <h1 className="welcome-h1">Musify</h1>
                     </div>
                     <h2 className="welcome-h2">
-                        Just the place for true music connoisseurs.
+                        Just the place for true music listeners.
                     </h2>
                 </div>
             )}

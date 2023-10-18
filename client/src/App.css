@@ -583,7 +583,25 @@ svg.control-panel-btn {
     left: 0%;
     padding: 23px;
     padding-bottom: 20px;
+    background-color: black;
 }
+
+.control-panel-box-mobile {
+    padding: 12px;
+    padding-bottom: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    display: none;
+}
+.control-panel-box-mobile-top {
+    display: flex;
+}
+
 .control-panel-left {
     width: 20%;
     display: flex;
@@ -932,6 +950,37 @@ leftbar div.card {
     .card-item {
         /* min-width: 100px; */
         width: calc((100vw - 69px) / 2);
+    }
+
+    .center-box {
+        padding: 12px;
+    }
+
+    .control-panel-box-absolute {
+        padding: 12px;
+        display: none;
+    }
+    .control-panel-box-mobile {
+        display: flex;
+        padding: 0px 12px;
+        height: 60px;
+    }
+    .control-panel-box-mobile-top {
+        height: 40px;
+    }
+    .control-panel-box-mobile-bottom {
+        height: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .control-panel-range {
+        height: 4px;
+    }
+
+    .test-home-box {
+        padding-bottom: 60px;
+        overflow: hidden;
+        /* margin-bottom: 135px; */
     }
 
     /* albums details */

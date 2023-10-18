@@ -922,7 +922,8 @@ leftbar div.card {
         padding: 0px;
     }
     .card-item {
-        min-width: 100px;
+        /* min-width: 100px; */
+        width: calc((100vw - 69px) / 2);
     }
 
     /* albums details */

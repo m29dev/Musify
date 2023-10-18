@@ -75,6 +75,7 @@ svg {
     height: 100vh;
     width: 100vw;
     padding-top: 8px;
+    overflow: hidden;
 }
 
 .bar-box {
@@ -132,6 +133,7 @@ svg {
     align-items: center;
     cursor: pointer;
     padding: 0px 16px;
+    overflow: auto;
 }
 .leftbar-title {
     width: 100%;
@@ -260,7 +262,7 @@ svg {
     );
     display: flex;
     flex-direction: column;
-    /* overflow: auto; */
+    overflow: auto;
 }
 .center-box-home {
     background-color: black !important;
@@ -286,7 +288,7 @@ svg {
     column-gap: 23px;
     row-gap: 23px;
     padding: 0px;
-    overflow: auto;
+    /* overflow: auto; */
     max-height: 100%;
     margin-top: 23px;
     /* margin-bottom: 55px; */
@@ -350,6 +352,7 @@ svg {
     -webkit-box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
     -moz-box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
     box-shadow: 4px 4px 21px 0px rgb(0, 0, 0);
+    object-fit: cover;
 }
 .playlist-details-info {
     width: 100%;
@@ -364,18 +367,21 @@ svg {
     font-size: 5em;
     font-weight: bold;
     text-wrap: nowrap;
+    overflow: hidden;
 }
 .playlist-name-long {
     width: 600;
     font-size: 3em;
     font-weight: bold;
     text-wrap: nowrap;
+    overflow: hidden;
 }
 .playlist-name-real-long {
     width: 600;
     font-size: 2em;
     font-weight: bold;
     text-wrap: nowrap;
+    overflow: hidden;
 }
 .playlist-description {
     font-size: 14px;
@@ -516,6 +522,10 @@ a:hover {
     justify-self: center;
     align-self: center;
 }
+.control-panel-btn-box-mobile {
+    display: flex;
+    justify-content: flex-end;
+}
 .control-panel-volume-box {
     width: 40%;
     display: flex;
@@ -588,7 +598,7 @@ svg.control-panel-btn {
 
 .control-panel-box-mobile {
     padding: 12px;
-    padding-bottom: 0px;
+    padding-bottom: 4px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -596,6 +606,8 @@ svg.control-panel-btn {
     position: absolute;
     bottom: 0;
     left: 0%;
+    background-color: black;
+    border-radius: 18px;
     display: none;
 }
 .control-panel-box-mobile-top {
@@ -663,7 +675,7 @@ svg.control-panel-btn {
 /* SEARCH RESULTS */
 .search-results-box {
     height: 100%;
-    overflow: auto;
+    /* overflow: auto; */
     padding-right: 23px;
     margin-top: 23px;
 }
@@ -680,6 +692,7 @@ svg.control-panel-btn {
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     padding: 16px;
+    object-fit: cover;
 }
 .img-albums {
     width: 100%;
@@ -793,7 +806,7 @@ leftbar div.card {
 }
 
 .test-home-page {
-    height: 78px;
+    height: 54px;
     background-color: rgb(0, 3, 54) !important;
     background: none;
     margin-bottom: 8px;
@@ -936,12 +949,18 @@ leftbar div.card {
 }
 
 @media screen and (max-width: 500px) {
+    .form-control {
+        margin-top: 14px;
+        width: 100%;
+    }
+
     /* search results */
     .search-results-grid {
         width: 100%;
         position: relative;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        row-gap: 23px;
+        row-gap: 14px;
+        column-gap: 14px;
         overflow: auto;
     }
     .search-results-box {
@@ -949,21 +968,20 @@ leftbar div.card {
     }
     .card-item {
         /* min-width: 100px; */
-        width: calc((100vw - 69px) / 2);
+        width: calc((100vw - 42px) / 2);
     }
 
     .center-box {
-        padding: 12px;
+        padding: 14px;
     }
 
     .control-panel-box-absolute {
-        padding: 12px;
+        padding: 14px;
         display: none;
     }
     .control-panel-box-mobile {
         display: flex;
-        padding: 0px 12px;
-        height: 60px;
+        height: 78px;
     }
     .control-panel-box-mobile-top {
         height: 40px;
@@ -978,7 +996,7 @@ leftbar div.card {
     }
 
     .test-home-box {
-        padding-bottom: 60px;
+        padding-bottom: 64px;
         overflow: hidden;
         /* margin-bottom: 135px; */
     }
@@ -998,7 +1016,8 @@ leftbar div.card {
         aspect-ratio: 1 / 1;
     }
     .search-results-box {
-        overflow: auto;
+        /* overflow: auto; */
+        margin-top: 14px;
     }
     .playlist-name {
         font-size: 10vw;
@@ -1011,12 +1030,30 @@ leftbar div.card {
 
     /* playlists / albums */
     .home-box-classic {
-        grid-template-columns: 46% 46%;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 14px;
+        row-gap: 14px;
     }
     p.card-text {
         max-height: 50px;
         font-size: 15px;
         overflow: hidden;
+    }
+
+    .playlist-name {
+        width: 100%;
+        font-size: 8vw;
+        overflow: auto;
+    }
+    .playlist-name-long {
+        width: 100%;
+        font-size: 7vw;
+        overflow: auto;
+    }
+    .playlist-name-real-long {
+        width: 100%;
+        font-size: 6vw;
+        overflow: auto;
     }
 
     /* playlist / album table items */

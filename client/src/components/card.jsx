@@ -30,9 +30,10 @@ function CardComponent(playlist) {
 
                 {playlistInfo?.playlist?.artists && (
                     <div>
-                        {playlistInfo?.playlist?.artists.map((artist) => (
-                            <p key={artist?.name}>{artist?.name}</p>
-                        ))}
+                        {playlistInfo?.playlist?.artists.map((artist, index) =>
+                            // <p key={artist?.name}>{artist?.name}</p>
+                            index > 0 ? `, ${artist?.name}` : `${artist?.name}`
+                        )}
                     </div>
                 )}
             </Card.Body>

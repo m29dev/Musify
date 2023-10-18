@@ -261,7 +261,7 @@ const ControlPanel = () => {
                             )}
 
                             {/* control btns */}
-                            <div className="control-panel-btn-box">
+                            <div className="control-panel-btn-box-mobile">
                                 <BiSkipPrevious
                                     className="control-panel-btn"
                                     onClick={() => {

@@ -176,7 +176,7 @@ const Navbar = () => {
             {authMode && (
                 <div
                     className="navbar-box"
-                    style={{ justifyContent: 'center' }}
+                    style={{ justifyContent: 'center', margin: '0px' }}
                 >
                     <a href="https://musifyserver.onrender.com/api/auth/signin">
                         Sign In via Spotify <ImSpotify></ImSpotify>

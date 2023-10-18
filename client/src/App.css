@@ -38,6 +38,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 14px;
 }
 .navbar-box-item {
     display: flex;
@@ -1004,10 +1005,11 @@ leftbar div.card {
     /* albums details */
     .playlist-details-navbar {
         flex-direction: column;
-        /*  */
+        margin-top: 14px;
     }
     .playlist-details-info {
         padding: 0px;
+        padding-top: 14px;
     }
     .playlist-details-img-box {
         margin: 0px auto;

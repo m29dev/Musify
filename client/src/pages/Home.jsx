@@ -62,7 +62,19 @@ const Home = () => {
     }, [songInfo, getTopSongs])
 
     return (
-        <div className="center-box test-home-page">
+        <div
+            className="center-box test-home-page"
+            style={
+                authInfo
+                    ? {}
+                    : {
+                          maxWidth: '100%',
+                          overflow: 'hidden',
+                          display: 'flex',
+                          justifyContent: 'ceneter',
+                      }
+            }
+        >
             {/* navbar main */}
             <Navbar></Navbar>
 

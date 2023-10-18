@@ -788,6 +788,7 @@ leftbar div.card {
     display: flex;
     flex-direction: column;
     padding-bottom: 97px;
+    overflow: hidden;
     /* margin-bottom: 97px; */
     /*  */
 }
@@ -884,6 +885,7 @@ leftbar div.card {
     /* youtube player */
     .test-home-box {
         padding-bottom: 135px;
+        overflow: hidden;
         /* margin-bottom: 135px; */
     }
 

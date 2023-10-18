@@ -12,14 +12,15 @@ const App = () => {
                 <Leftbar />
                 <div className="test-home-box">
                     <Outlet />
+
                     {/* youtube player */}
                     <YoutubePlayer></YoutubePlayer>
+
+                    {/* control panel bar */}
+                    <ControlPanel></ControlPanel>
                 </div>
                 <Rightbar />
             </div>
-
-            {/* control panel bar */}
-            <ControlPanel></ControlPanel>
         </>
     )
 }

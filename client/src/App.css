@@ -247,6 +247,7 @@ svg {
 .center-box {
     /* min-width: 1000px; */
     width: 100%;
+    max-width: 1004px;
     height: 100%;
     padding: 23px;
     border-radius: 18px;
@@ -782,9 +783,12 @@ leftbar div.card {
 .test-home-box {
     width: 100%;
     height: 100%;
+    /* width: 100vw;
+    height: 100vh; */
     display: flex;
     flex-direction: column;
     padding-bottom: 97px;
+    /* margin-bottom: 97px; */
     /*  */
 }
 .test-player {
@@ -880,10 +884,12 @@ leftbar div.card {
     /* youtube player */
     .test-home-box {
         padding-bottom: 135px;
+        /* margin-bottom: 135px; */
     }
 
     /* control panel */
     .control-panel-box-absolute {
+        /* position: relative; */
         flex-direction: column;
     }
     .control-panel-center,

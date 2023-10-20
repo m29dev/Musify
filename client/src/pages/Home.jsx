@@ -71,7 +71,7 @@ const Home = () => {
                           maxWidth: '100%',
                           overflow: 'hidden',
                           display: 'flex',
-                          justifyContent: 'ceneter',
+                          justifyContent: 'center',
                       }
             }
         >

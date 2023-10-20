@@ -147,7 +147,7 @@ const Navbar = () => {
                     </div>
 
                     {/* nav account */}
-                    <Dropdown data-bs-theme="dark">
+                    <Dropdown data-bs-theme="dark" drop="start">
                         <Dropdown.Toggle
                             variant="none"
                             className="img-dropdown"

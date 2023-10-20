@@ -39,6 +39,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 14px;
+    z-index: 100;
 }
 .navbar-box-item {
     display: flex;
@@ -808,6 +809,7 @@ leftbar div.card {
 
 .test-home-page {
     height: 76px;
+    max-height: 76px;
     background-color: rgb(0, 3, 54) !important;
     background: none;
     margin-bottom: 8px;

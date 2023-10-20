@@ -20,6 +20,7 @@ import { BiHomeAlt2, BiSolidPlaylist } from 'react-icons/bi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { LuAlbum } from 'react-icons/lu'
 import { ImSpotify } from 'react-icons/im'
+import { RxAvatar } from 'react-icons/rx'
 
 const Navbar = () => {
     const [authMode, setAuthMode] = useState(false)
@@ -153,15 +154,19 @@ const Navbar = () => {
                             className="img-dropdown"
                             style={{ padding: '0px', margin: '0px' }}
                         >
-                            <Image
-                                src={
-                                    accountInfo?.images
-                                        ? accountInfo.images[0].url
-                                        : ''
-                                }
-                                roundedCircle
-                                className="img-box"
-                            />
+                            {accountInfo?.images?.[0]?.url ? (
+                                <Image
+                                    src={
+                                        accountInfo?.images
+                                            ? accountInfo?.images?.[0]?.url
+                                            : ''
+                                    }
+                                    roundedCircle
+                                    className="img-box"
+                                />
+                            ) : (
+                                <RxAvatar className="img-box"></RxAvatar>
+                            )}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>

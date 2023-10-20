@@ -32,6 +32,7 @@ const Home = () => {
     const getTopSongs = useCallback(async () => {
         try {
             const res = await topSongs(authInfo?.access_token).unwrap()
+            console.log('RES_TEST: ', res)
 
             const songArtist = res?.items?.[0]?.artists?.[0]?.name
             const songName = res?.items?.[0]?.name

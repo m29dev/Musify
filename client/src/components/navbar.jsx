@@ -178,13 +178,13 @@ const Navbar = () => {
                     className="navbar-box"
                     style={{ justifyContent: 'center', margin: '0px' }}
                 >
-                    {/* <a href="https://musifyserver.onrender.com/api/auth/signin">
-                        Sign In via Spotify <ImSpotify></ImSpotify>
-                    </a> */}
-
-                    <a href="http://localhost:3000/api/auth/signin">
+                    <a href="https://musifyserver.onrender.com/api/auth/signin">
                         Sign In via Spotify <ImSpotify></ImSpotify>
                     </a>
+
+                    {/* <a href="http://localhost:3000/api/auth/signin">
+                        Sign In via Spotify <ImSpotify></ImSpotify>
+                    </a> */}
                 </div>
             )}
         </>

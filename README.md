@@ -29,6 +29,20 @@ Here're some of the project's best features:
 *   sidebars with current playlists's and song's information (option to hide sidebars)
 *   responsive layout for mobile devices
 
+<h2>Spotify test account</h2>
+
+<p>login:</p>
+
+```
+musifyapp23@gmail.com
+```
+
+<p>password:</p>
+
+```
+Spotify23#
+```
+
 <h2>Project Screenshots</h2>
 
 1. Welcome Page </br>

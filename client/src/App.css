@@ -807,10 +807,12 @@ leftbar div.card {
 }
 
 .test-home-page {
-    height: 54px;
+    height: 76px;
     background-color: rgb(0, 3, 54) !important;
     background: none;
     margin-bottom: 8px;
+    max-width: 100%;
+    overflow: hidden;
 }
 .test-home-box {
     width: 100%;
@@ -1028,6 +1030,10 @@ leftbar div.card {
     .table-item {
         max-width: 100%;
         overflow: hidden;
+    }
+
+    .test-home-page {
+        height: 54px;
     }
 
     /* playlists / albums */
